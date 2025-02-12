@@ -22,4 +22,4 @@ jobs:
         uses: rossjrw/pr-preview-action@v1
         with:
           preview-branch: main
-          pages-base-url: syzygyco-op.github.io/
+          pages-base-url: syzygyco-op.github.io
