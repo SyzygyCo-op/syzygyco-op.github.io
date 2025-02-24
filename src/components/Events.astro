@@ -1,0 +1,46 @@
+---
+import Prose from "./Prose.astro";
+import Section from "./Section.astro";
+---
+
+<Section id="events">
+    <Prose>
+        <h2>Events</h2>
+        <p>
+            Check our Google calendar for the most up-to-date information about
+            upcoming events.
+        </p>
+    </Prose>
+    <!-- Embed our Google Calendar -->
+    <iframe
+        id="gcal-iframe"
+        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&mode=AGENDA&showCalendars=0&showNav=0&showTitle=0&src=YWI1NTk0YzkyN2Y0OWIwZmRiYWM2ZGY1MTA1YmFhYjEzZmE4Yzg1YTU1NzQ1NTE5OWQ0ZmZlOGExZTNkMjcyN0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
+        style="border-width:0"
+        width="800"
+        height="600"
+        frameborder="0"
+        scrolling="no"
+        title="Syzygy Calendar"></iframe>
+
+    <script type="text/javascript">
+        /* Make sure the google calendar is always an appropriate size no matter what the screen size is */
+        setTimeout(() => {
+            setGCalWidth();
+        }, 500);
+
+        let timeoutId = null;
+        window.addEventListener("resize", () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                setGCalWidth();
+            }, 500);
+        });
+
+        function setGCalWidth() {
+            const iframe = document.getElementById("gcal-iframe");
+            const parentWidth = iframe.parentElement.clientWidth;
+            iframe.style.width = `${parentWidth}px`;
+            iframe.style.height = `${parentWidth * 0.75}px`;
+        }
+    </script>
+</Section>

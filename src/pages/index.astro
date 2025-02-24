@@ -1,0 +1,57 @@
+---
+import AboutUs from "../components/AboutUs.astro";
+import Events from "../components/Events.astro";
+import Contact from "../components/Contact.astro";
+import MembersList from "../components/MembersList.astro";
+import Layout from "../layouts/Layout.astro";
+import Prose from "../components/Prose.astro";
+import Section from "../components/Section.astro";
+
+import { Content as AboutContent } from "./about.md";
+import { Content as ContactContent } from "./contact.md";
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<!--
+  Welcome to the source code for the Syzygy Artist Co-Op website!
+
+  This is the "entry point" for the website, the first file that the browser will load when a user visits the site.
+
+  The text inside the "\<!--" and "--\>" (such as this!) are a comments, which are ignored by the web browser.
+  They're just for humans to read and help explain what's going on in the code.
+
+  The text inside of the arrow brackets "<" and ">" are HTML tags. These tags are instructions to the browser.
+  For an overview of HTML, see https://developer.mozilla.org/en-US/docs/Web/HTML.
+  For more information on particular tags, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element.
+-->
+<Layout>
+	<nav class="w-full py-2 bg-red-700 text-gray-200 font-bold" slot="nav">
+		<ul class="flex flex-row flex-wrap justify-evenly">
+			<li><a href="#about">About</a></li>
+			<li><a href="#events">Events</a></li>
+			<li><a href="#contact">Contact</a></li>
+			<li><a href="#members">Members</a></li>
+		</ul>
+	</nav>
+	<Section id="syzygy">
+		<h1
+			class="oi-regular text-center text-red-700 text-3xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl"
+		>
+			Syzygy SF
+		</h1>
+	</Section>
+	<Section id="about">
+		<Prose>
+			<AboutContent />
+		</Prose>
+	</Section>
+	<Events />
+	<Section id="contact">
+		<Prose>
+			<ContactContent />
+		</Prose>
+	</Section>
+	<MembersList />
+</Layout>

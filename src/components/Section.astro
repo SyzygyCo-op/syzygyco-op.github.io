@@ -1,0 +1,18 @@
+---
+const { size, background, id, noSpace, fullWidth } = Astro.props;
+
+let baseClass = noSpace ? "" : "my-8 ";
+
+const containerClass = fullWidth
+    ? "w-full"
+    : size === "large"
+      ? "mx-4 md:mx-[50px] lg:mx-[100px] xl:mx-[150px] 2xl:mx-[200px]"
+      : "mx-4 md:mx-[100px] lg:mx-[200px] xl:mx-[300px] 2xl:mx-[400px]";
+const backgroundClass = background ? `bg-${background} bg-repeat` : "";
+---
+
+<div class={backgroundClass} id={id}>
+    <div class={baseClass + containerClass}>
+        <slot />
+    </div>
+</div>
