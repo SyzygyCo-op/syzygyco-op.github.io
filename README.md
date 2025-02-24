@@ -21,9 +21,9 @@ Also check out the [Requirements/Design doc](https://docs.google.com/document/d/
 
 ## How do I add or remove members?
 
-Add members in `src/members/`. Make sure to add a photo AND a markdown file with their name, relative link to the photo, and optionally a description in the body.
+Add members in `content/members/`. Make sure to add a photo AND a markdown file with their name, relative link to the photo, and optionally a description in the body.
 
-Remove members by deleting their entries in `src/members`
+Remove members by deleting their entries in `content/members`
 
 ## Help!
 
