@@ -6,41 +6,16 @@ import Section from "./Section.astro";
 <Section id="events">
     <Prose>
         <h2>Events</h2>
-        <p>
-            Check our Google calendar for the most up-to-date information about
-            upcoming events.
-        </p>
     </Prose>
-    <!-- Embed our Google Calendar -->
-    <iframe
-        id="gcal-iframe"
-        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&mode=AGENDA&showCalendars=0&showNav=0&showTitle=0&src=YWI1NTk0YzkyN2Y0OWIwZmRiYWM2ZGY1MTA1YmFhYjEzZmE4Yzg1YTU1NzQ1NTE5OWQ0ZmZlOGExZTNkMjcyN0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
-        style="border-width:0"
-        width="800"
-        height="600"
-        frameborder="0"
-        scrolling="no"
-        title="Syzygy Calendar"></iframe>
-
-    <script type="text/javascript">
-        /* Make sure the google calendar is always an appropriate size no matter what the screen size is */
-        setTimeout(() => {
-            setGCalWidth();
-        }, 500);
-
-        let timeoutId = null;
-        window.addEventListener("resize", () => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                setGCalWidth();
-            }, 500);
-        });
-
-        function setGCalWidth() {
-            const iframe = document.getElementById("gcal-iframe");
-            const parentWidth = iframe.parentElement.clientWidth;
-            iframe.style.width = `${parentWidth}px`;
-            iframe.style.height = `${parentWidth * 0.75}px`;
-        }
-    </script>
+    <!-- Start of SimpleTix Widget. Paste this in to your website where you want the widget to appear. Do no change the code or the widget may not work properly. -->
+    <div style="width:100%; text-align:left;">
+       <div id="simpletixEmbed">
+           <script src="https://embed.prod.simpletix.com/assets/widget/embediFrame.js" data-url="https://embed.prod.simpletix.com/663549e3-456f-4c83-873d-145658f82d39/210866?smtxorigin=12"></script>
+       </div>
+       <div style="font-family:Helvetica, Arial; font-size:12px; padding:10px 0 5px; margin:2px; width:100%; text-align:left;" >
+           <a style="color: #ADB0B6; text-decoration: none;" target="_parent" 
+           href ='https://www.simpletix.com/?utm_source=embed&utm_medium=web&utm_campaign=embedwidget&utm_content=footer&a=logo'>Powered by SimpleTix</a>
+       </div>
+    </div>
+    <!-- End of SimpleTix Widget -->
 </Section>
