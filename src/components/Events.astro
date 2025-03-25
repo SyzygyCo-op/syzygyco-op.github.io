@@ -7,14 +7,27 @@ import Section from "./Section.astro";
     <Prose>
         <h2>Events</h2>
     </Prose>
+
     <link href='https://embed.prod.simpletix.com/assets/widget/widget.min.css?t=2024.05.08' rel="stylesheet" />
-    <script src='https://embed.prod.simpletix.com/assets/widget/widget.min.js?t=2025.02.19'></script>
+
+    <!-- Need to add is:inline to the script tag to avoid CORS issues with the SimpleTix widget due to some Astro magic -->
+    <script src='https://embed.prod.simpletix.com/assets/widget/widget.min.js?t=2025.02.19' is:inline></script>
     <div class="smt-pin-board" id="smt_pinBoard">
       <input type="hidden" value="4774a52b-d36a-4762-ac3b-ca1dcbc3b764" id="smt_hdnApplicationId" />
+
       <input type="hidden" value="Syzygy Co-op" id="smt_hdnStoreName" />
-      <input type="hidden" value="0" id="smt_openEventPageType" />
-      <input type="hidden" value="1" id="smt_isDisplayEventCategory" />
+
+      <!-- Set the value to 1 to open the event page in a new tab -->
+      <input type="hidden" value="1" id="smt_openEventPageType" />
+
+      <!-- Set the value to 1 to show the event category. I think
+        it looks bad.
+      -->
+      <input type="hidden" value="" id="smt_isDisplayEventCategory" />
+
       <input type="hidden" value="" id="smt_selectedEventCategories" />
+
       <input type="hidden" value="Next50" id="smt_displayStyle" />
     </div>
+
 </Section>
