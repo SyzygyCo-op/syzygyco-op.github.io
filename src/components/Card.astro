@@ -1,6 +1,9 @@
-<div class="border border-gray-200 flex-shrink bg-yellow-50">
+---
+import { cardClassName } from "../utils";
+---
+<div class={cardClassName}>
     <slot name="header" />
-    <div class="p-6">
+    <div class="p-4">
         <slot />
     </div>
     <slot name="footer" />

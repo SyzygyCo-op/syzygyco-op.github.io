@@ -5,6 +5,8 @@ import Prose from "./Prose.astro";
 import { getCollection } from "astro:content";
 
 const members = await getCollection("members");
+
+import { rowClassName } from "../utils";
 ---
 
 <Section fullWidth>
@@ -15,7 +17,7 @@ const members = await getCollection("members");
     </Section>
     <Section size="large" noSpace>
         <div
-            class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-4 content-center"
+            class={rowClassName}
         >
             {members.map((member) => <MemberCard member={member} />)}
         </div>

@@ -1,32 +1,87 @@
 ---
 import Prose from "./Prose.astro";
 import Section from "./Section.astro";
+import "../styles/simpletix-widget.css";
+
+import EventCard from "./EventCard.astro";
+import { getCollection } from "astro:content";
+
+import { rowClassName } from "../utils";
+
+const events = await getCollection("events");
+
 ---
 
-<Section id="events">
-    <Prose>
+<Section fullWidth id="events">
+    <Section noSpace>
+      <Prose>
         <h2>Events</h2>
-    </Prose>
+        <h3>Special Events</h3>
+      </Prose>
+    </Section>
+
+    <!-- Need to add is:inline to the script tag to avoid CORS issues with the SimpleTix widget due to some Astro magic -->
+    <script src='https://embed.prod.simpletix.com/assets/widget/widget.min.js?t=2025.02.19' is:inline></script>
+
+    <Section size="large" noSpace>
+      <div class="smt-pin-board" id="smt_pinBoard">
+        <input type="hidden" value="4774a52b-d36a-4762-ac3b-ca1dcbc3b764" id="smt_hdnApplicationId" />
+
+        <input type="hidden" value="Syzygy Co-op" id="smt_hdnStoreName" />
+
+        <!-- Set the value to 1 to open the event page in a new tab -->
+        <input type="hidden" value="1" id="smt_openEventPageType" />
+
+        <!-- Set the value to 1 to show the event category. I think it looks bad. -->
+        <input type="hidden" value="" id="smt_isDisplayEventCategory" />
+
+        <input type="hidden" value="" id="smt_selectedEventCategories" />
+
+        <input type="hidden" value="Next50" id="smt_displayStyle" />
+      </div>
+    </Section>
+
+    <Section noSpace>
+      <Prose>
+        <h3>Regular Events</h3>
+      </Prose>
+    </Section>
+    <Section size="large" noSpace>
+        <div
+          class={rowClassName}
+        >
+            {events.map((event) => <EventCard event={event} />)}
+        </div>
+    </Section>
 </Section>
 
-<link href='https://embed.prod.simpletix.com/assets/widget/widget.min.css?t=2024.05.08' rel="stylesheet" />
+<script>
+  // Hack to make the SimpleTix widget styling consistent with the rest of the site.
+  import { rowClassName, cardClassName } from "../utils";
+  const smtPinBoard = document.getElementById('smt_pinBoard');
 
-<!-- Need to add is:inline to the script tag to avoid CORS issues with the SimpleTix widget due to some Astro magic -->
-<script src='https://embed.prod.simpletix.com/assets/widget/widget.min.js?t=2025.02.19' is:inline></script>
-<div class="smt-pin-board" id="smt_pinBoard">
-  <input type="hidden" value="4774a52b-d36a-4762-ac3b-ca1dcbc3b764" id="smt_hdnApplicationId" />
+  function addClassNames(element, classNames) {
+    for (const className of classNames.split(" ")) {
+      element.classList.add(className);
+    }
+  }
 
-  <input type="hidden" value="Syzygy Co-op" id="smt_hdnStoreName" />
+  function hackSimpleTixWidgetStyling() {
+    const rows = smtPinBoard.querySelectorAll('.smt-row');
+    for(const row of rows) {
+      addClassNames(row, rowClassName);
+      const items = row.querySelectorAll('.smt-list-box');
+      for(const item of items) {
+        addClassNames(item, cardClassName);
+      }
+    }
+  }
 
-  <!-- Set the value to 1 to open the event page in a new tab -->
-  <input type="hidden" value="1" id="smt_openEventPageType" />
+  const observer = new MutationObserver(hackSimpleTixWidgetStyling);
+  observer.observe(smtPinBoard, {
+    childList: true,
+    subtree: true
+  });
 
-  <!-- Set the value to 1 to show the event category. I think
-    it looks bad.
-  -->
-  <input type="hidden" value="" id="smt_isDisplayEventCategory" />
+</script>
 
-  <input type="hidden" value="" id="smt_selectedEventCategories" />
-
-  <input type="hidden" value="Next50" id="smt_displayStyle" />
-</div>
