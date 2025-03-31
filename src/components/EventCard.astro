@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import Card from "./Card.astro";
+import Prose from "./Prose.astro";
+import { render, type CollectionEntry } from "astro:content";
+
+interface Props {
+    member: CollectionEntry<"members">;
+}
+
+const { event } = Astro.props;
+const { Content } = await render(event); // Renders the content of the event entry
+---
+
+<Card>
+    <Image
+        src={event.data.image}
+        alt={event.data.imageAlt}
+        class="w-full"
+        slot="header"
+    />
+    <Prose>
+        <h3>{event.data.title}</h3>
+        <date>{event.data.time}</date>
+        <Content />
+    </Prose>
+</Card>

@@ -2,18 +2,25 @@
 import Prose from "./Prose.astro";
 import Section from "./Section.astro";
 import "../styles/simpletix-widget.css";
+
+import EventCard from "./EventCard.astro";
+import { getCollection } from "astro:content";
+
+const events = await getCollection("events");
+---
 ---
 
 <Section fullWidth id="events">
     <Section noSpace>
-    <Prose>
+      <Prose>
         <h2>Events</h2>
         <h3>Special Events</h3>
-    </Prose>
+      </Prose>
     </Section>
 
     <!-- Need to add is:inline to the script tag to avoid CORS issues with the SimpleTix widget due to some Astro magic -->
     <script src='https://embed.prod.simpletix.com/assets/widget/widget.min.js?t=2025.02.19' is:inline></script>
+
     <div class="smt-pin-board" id="smt_pinBoard">
       <input type="hidden" value="4774a52b-d36a-4762-ac3b-ca1dcbc3b764" id="smt_hdnApplicationId" />
 
@@ -29,4 +36,17 @@ import "../styles/simpletix-widget.css";
 
       <input type="hidden" value="Next50" id="smt_displayStyle" />
     </div>
+
+    <Section noSpace>
+      <Prose>
+        <h3>Regular Events</h3>
+      </Prose>
+    </Section>
+    <Section size="large" noSpace>
+        <div
+            class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-4 content-center"
+        >
+            {events.map((event) => <EventCard event={event} />)}
+        </div>
+    </Section>
 </Section>
