@@ -7,28 +7,13 @@
 
 
 .smt-pin-board .smt-wrapper-inner {
-  padding-left: 1rem;
-  padding-right: 1rem;
   margin: auto;
+  margin-bottom: 2rem;
   box-sizing: border-box;
 }
 
-.smt-pin-board .smt-upcoming_events .smt-list-box {
-  width: calc(33.15% - 30px);
-  margin: 1rem 0.5rem 0;
-  overflow: hidden;
-  background: #fff;
-  position: relative;
-  border: var(--color-gray-200) solid 1px;
-}
-
 .smt-pin-board .smt-upcoming_events .smt-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  margin: 0 -15px;
+  margin-top: 1rem;
 }
 
 .smt-pin-board .smt-upcoming_events .smt-list-box .smt-event_image {
@@ -36,13 +21,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
-}
-
-.smt-pin-board .smt-tab-content {
-  display: none;
-  padding: 6px 12px;
-  -webkit-animation: fadeEffect 1s;
-  animation: fadeEffect 1s;
 }
 
 .smt-pin-board .smt-upcoming_events .smt-list-box a {
@@ -64,7 +42,7 @@
   width: 100%;
   height: 100%;
   z-index: 5;
-  background: #000;
+  background: white;
   opacity: 0;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
@@ -72,10 +50,10 @@
 }
 
 .smt-pin-board .smt-upcoming_events .smt-list-box a:hover::before {
-  opacity: 0.1;
+  opacity: 0.3;
 }
 .smt-pin-board .smt-search-wrapper {
-  background-color: #f7f4ef;
+  background-color: var(--color-yellow-50);
   padding: 0.25rem 0.5rem;
   border: 1px solid var(--color-gray-200);
   display: flex;
@@ -247,18 +225,11 @@ ul.smt-navs li.smt-event_date_time::before {
 }
 
 .smt-pin-board .smt-upcoming_events .smt-list-box .smt-event_contentdiv {
-  padding: 20px 28px;
+  padding: 1rem;
 }
 
 .smt-pin-board div#showlist {
   margin: 0 -25px;
-}
-
-@media only screen and (max-width: 992px) {
-  .smt-upcoming_events .smt-list-box {
-    margin: 30px 15px 0;
-    width: calc(50% - 30px);
-  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -267,11 +238,6 @@ ul.smt-navs li.smt-event_date_time::before {
   }
   .smt-pin-board .smt-upcoming_events .smt-row {
     padding: 0;
-  }
-
-  .smt-pin-board .smt-upcoming_events .smt-list-box {
-    width: calc(50.33% - 30px);
-    margin: 20px 12px 0;
   }
 
   .smt-pin-board
