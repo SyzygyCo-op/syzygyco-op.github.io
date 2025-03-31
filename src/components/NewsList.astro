@@ -1,0 +1,14 @@
+---
+import NewsCard from "./NewsCard.astro";
+import Section from "./Section.astro";
+import Prose from "./Prose.astro";
+import { getCollection } from "astro:content";
+
+const news = await getCollection("news");
+---
+
+<div
+    class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-4 content-center"
+>
+    {news.map((item) => <NewsCard news={item} />)}
+</div>
