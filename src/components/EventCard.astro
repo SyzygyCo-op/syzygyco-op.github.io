@@ -20,8 +20,9 @@ const { Content } = await render(event); // Renders the content of the event ent
         slot="header"
     />
     <Prose>
-        <h3>{event.data.title}</h3>
-        <date>{event.data.time}</date>
+        <h4>{event.data.title}</h4>
+        <i>{event.data.time}</i>
         <Content />
     </Prose>
 </Card>
+
