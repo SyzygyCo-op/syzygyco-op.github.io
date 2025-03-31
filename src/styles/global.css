@@ -2,7 +2,6 @@
 
 @plugin '@tailwindcss/typography';
 
-
 @layer base {
     html {
         font-size: 24px;
@@ -90,4 +89,10 @@
     }
 
     /* endregion Fonts */
+
+    h4 {
+      /* TODO understand how the typography plugin works */
+        font-weight: 700; /* Bold */
+    }
 }
+

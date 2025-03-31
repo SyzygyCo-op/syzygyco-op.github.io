@@ -21,9 +21,20 @@ const news = defineCollection({
         title: z.string(),
         url: z.string(),
         image: image(),
-        imageAlt: z.string()
+        imageAlt: z.string(),
+    }),
+});
+
+const events = defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./content/events" }),
+    schema: ({image}) => z.object({
+        image: image(),
+        imageAlt: z.string(),
+        title: z.string(),
+        time: z.string(),
     }),
 });
 
 // 4. Export a single `collections` object to register your collection(s)
-export const collections = { members, news };
+export const collections = { members, events, news };
+
