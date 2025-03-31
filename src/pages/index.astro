@@ -3,6 +3,7 @@ import AboutUs from "../components/AboutUs.astro";
 import Events from "../components/Events.astro";
 import Contact from "../components/Contact.astro";
 import MembersList from "../components/MembersList.astro";
+import NewsList from "../components/NewsList.astro";
 import Layout from "../layouts/Layout.astro";
 import Prose from "../components/Prose.astro";
 import Section from "../components/Section.astro";
@@ -31,6 +32,7 @@ import { Content as ContactContent } from "./contact.md";
 		<ul class="flex flex-row flex-wrap justify-evenly">
 			<li><a href="#about">About</a></li>
 			<li><a href="#events">Events</a></li>
+			<li><a href="#news">News</a></li>
 			<li><a href="#contact">Contact</a></li>
 			<li><a href="#members">Members</a></li>
 		</ul>
@@ -48,6 +50,17 @@ import { Content as ContactContent } from "./contact.md";
 		</Prose>
 	</Section>
 	<Events />
+  <Section fullWidth id="news">
+    <!-- A section for news about Syzygy, either from the co-op itself or external news organizations.  -->
+    <Section noSpace>
+      <Prose>
+        <h2>News!</h2>
+      </Prose>
+    </Section>
+    <Section size="large" noSpace>
+      <NewsList />
+    </Section>
+  </Section>
 	<Section id="contact">
 		<Prose>
 			<ContactContent />

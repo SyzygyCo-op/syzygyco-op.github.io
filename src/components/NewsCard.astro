@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import Card from "./Card.astro";
+import Prose from "./Prose.astro";
+import { render, type CollectionEntry } from "astro:content";
+
+interface Props {
+    news: CollectionEntry<"news">;
+}
+
+const { news } = Astro.props;
+const { Content } = await render(news);
+---
+
+<Card>
+    <Image
+        src={news.data.image}
+        alt={news.data.imageAlt}
+        class="w-full"
+        slot="header"
+    />
+    <Prose>
+        <h3><a href={news.data.url}>{news.data.title}</a></h3>
+        <i>{news.data.author} in {news.data.publisher}</i>
+        <Content />
+    </Prose>
+</Card>
