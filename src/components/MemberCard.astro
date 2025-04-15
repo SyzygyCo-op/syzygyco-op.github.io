@@ -2,25 +2,25 @@
 import { Image } from "astro:assets";
 import Card from "./Card.astro";
 import Prose from "./Prose.astro";
-import { render, type CollectionEntry } from "astro:content";
 
 interface Props {
     member: CollectionEntry<"members">;
 }
 
-const { member } = Astro.props;
-const { Content } = await render(member);
+const { member } = Astro.props
+const { pronouns, name, photo } = member.data;
 ---
 
-<Card>
-    <Image
-        src={member.data.photo}
-        alt={member.data.name}
-        class="w-full"
-        slot="header"
-    />
-    <Prose>
-        <h3>{member.data.name}</h3>
-        <Content />
-    </Prose>
-</Card>
+<a href={`/members/${member.id}`}>
+  <Card>
+      <Image
+          src={photo}
+          alt={name}
+          class="w-full"
+          slot="header"
+      />
+      <Prose>
+          <h3>{name}</h3>
+      </Prose>
+  </Card>
+</a>
