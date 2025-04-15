@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import { getAssociativeCollection } from "../../lib/collections";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/Section.astro";
+import Prose from "../../components/Prose.astro";
+import Card from "../../components/Card.astro";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const arr = await getCollection("members");
+  const associative = await getAssociativeCollection(arr);
+  return arr.map((member) => ({
+    params: { member: member.id },
+    props: associative[member.id],
+  }));
+}
+
+const {name, pronouns, photo} = Astro.props.data;
+const {html} = Astro.props.rendered;
+---
+
+<Layout title={name}>
+  <Section>
+    <Image
+        src={photo}
+        alt={name}
+        class="w-1/2 float-right ml-2"
+    />
+    <Prose>
+      <h1>{name} {pronouns ? `(${pronouns})` : ''}</h1>
+      <div set:html={html} />
+    </Prose>
+  </Section>
+</Layout>

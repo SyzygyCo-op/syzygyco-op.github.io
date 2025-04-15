@@ -9,6 +9,7 @@ const members = defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./content/members" }),
     schema: ({image}) => z.object({
         name: z.string(),
+        pronouns: z.string(),
         photo: image(),
     }),
 });
