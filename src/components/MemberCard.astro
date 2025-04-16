@@ -11,16 +11,14 @@ const { member } = Astro.props
 const { pronouns, name, photo } = member.data;
 ---
 
-<a href={`/members/${member.id}`}>
-  <Card>
-      <Image
-          src={photo}
-          alt={name}
-          class="w-full"
-          slot="header"
-      />
-      <Prose>
-          <h3>{name}</h3>
-      </Prose>
-  </Card>
-</a>
+<Card>
+    <Image
+        src={photo}
+        alt={name}
+        class="w-full"
+        slot="header"
+    />
+    <Prose>
+        <h3><a href={`/members/${member.id}`}>{name}</a></h3>
+    </Prose>
+</Card>
