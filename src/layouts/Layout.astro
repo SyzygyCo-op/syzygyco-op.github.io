@@ -9,7 +9,7 @@ const {title} = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/jpeg" href="/content/cosmos-cat.jpg" />
 		<meta name="generator" content={Astro.generator} />
     <title>{title ? `${title} | ` : ''} Syzygy SF</title>
 		<!--REGION Google Fonts -->
@@ -20,6 +20,18 @@ const {title} = Astro.props;
 			rel="stylesheet"
 		/>
 		<!--ENDREGION Google Fonts -->
+
+    <!-- Facebook share metadata -->
+    <meta property="og:title" content="Syzygy Artist Co-Op">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://syzygyco-op.github.io">
+    <meta property="og:image" content="https://syzygyco-op.github.io/content/show.gif">
+
+    <!-- Twitter share metadata -->
+    <meta name="twitter:title" content="Syzygy Artist Co-Op">
+    <meta name="twitter:description" content="A co-op of artists and makers in San Francisco.">
+    <meta name="twitter:image" content="https://syzygyco-op.github.io/content/show.gif">
+    <meta name="twitter:card" content="summary_large_image">
 	</head>
 	<body class="bg-yellow-100">
 		<div class="sticky top-0 z-1">
