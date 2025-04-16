@@ -8,7 +8,7 @@ photo: ./patrick.jpg
 Hobby hangs, drink and draw, jam nights
 
 ## How would you describe yourself in a sentence or less?
-Thinking...
+Nösphere explorer.
 
 ## What are some things that you've done so far that you're really proud of or really happy about?
 I've made some weird art.
