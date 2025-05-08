@@ -16,3 +16,5 @@ I've made some weird art.
 ## What are some things you're excited about doing soon?
 Planning a low-key open mic night for game designers to share what they're working on.
 
+## If people want to follow you online, where should they look?
+[zzt64.com](https://zzt64.com) (my website)
