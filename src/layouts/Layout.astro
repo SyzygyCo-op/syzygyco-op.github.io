@@ -2,6 +2,7 @@
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 const {title} = Astro.props;
+import favicon from "../../content/cosmos-cat.jpg";
 ---
 
 <!doctype html>
@@ -9,7 +10,7 @@ const {title} = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/jpeg" href="/content/cosmos-cat.jpg" />
+    <link rel="icon" type="image/jpeg" href={favicon.src} />
 		<meta name="generator" content={Astro.generator} />
     <title>{title ? `${title} | ` : ''} Syzygy Artists Co-Op, San Francisco </title>
 		<!--REGION Google Fonts -->
