@@ -2,7 +2,7 @@
 image: ./drink-and-draw.webp
 imageAlt: A drawing of drink and draw, made at drink and draw!
 title: Drink and Draw
-time: See below
+time: Every other week...
 ---
 
 The name says it all!
