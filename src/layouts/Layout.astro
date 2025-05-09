@@ -3,6 +3,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 const {title} = Astro.props;
 import favicon from "../../content/cosmos-cat.jpg";
+import showPhoto from "../../content/show.gif";
 ---
 
 <!doctype html>
@@ -25,13 +26,13 @@ import favicon from "../../content/cosmos-cat.jpg";
     <!-- Facebook share metadata -->
     <meta property="og:title" content="Syzygy Artist Co-Op">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://syzygyco-op.github.io">
-    <meta property="og:image" content="https://syzygyco-op.github.io/content/show.gif">
+    <meta property="og:url" content="syzygysf.com">
+    <meta property="og:image" content={showPhoto.src}>
 
     <!-- Twitter share metadata -->
     <meta name="twitter:title" content="Syzygy Artist Co-Op">
     <meta name="twitter:description" content="A co-op of artists and makers in San Francisco.">
-    <meta name="twitter:image" content="https://syzygyco-op.github.io/content/show.gif">
+    <meta name="twitter:image" content={showPhoto.src}>
     <meta name="twitter:card" content="summary_large_image">
 	</head>
 	<body class="bg-yellow-100">
