@@ -13,5 +13,5 @@ And open during public events and by appointment.
 
 ### Online presence
 
-Chat us up on [Discord](https://discord.gg/8kK2d7Mb) or
+Chat us up on [Discord](https://discord.gg/vS8HhfRmYY) or
 [write us weird emails](mailto:someone@syzygysf.com)!
