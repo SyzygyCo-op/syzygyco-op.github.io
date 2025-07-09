@@ -28,19 +28,19 @@ import { Content as ContactContent } from "./contact.md";
   For more information on particular tags, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element.
 -->
 <Layout>
-	<Section id="syzygy">
-		<h1
-			class="oi-regular text-center text-red-700 text-3xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl"
-		>
-			Syzygy SF
-		</h1>
-	</Section>
-	<Section id="about">
-		<Prose>
-			<AboutContent />
-		</Prose>
-	</Section>
-	<Events />
+  <Section id="syzygy">
+    <h1
+      class="oi-regular text-center text-red-700 text-3xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl"
+    >
+      Syzygy SF
+    </h1>
+  </Section>
+  <Section id="about">
+    <Prose>
+      <AboutContent />
+    </Prose>
+  </Section>
+  <Events />
   <Section fullWidth id="news">
     <!-- A section for news about Syzygy, either from the co-op itself or external news organizations.  -->
     <Section noSpace>
@@ -52,21 +52,33 @@ import { Content as ContactContent } from "./contact.md";
       <NewsList />
     </Section>
   </Section>
-	<Section id="contact">
-		<Prose>
-			<ContactContent />
-		</Prose>
-	</Section>
-	<MembersList />
+  <Section id="contact">
+    <Prose>
+      <ContactContent />
+    </Prose>
+  </Section>
+  <MembersList />
   <Section id="supporters">
     <Prose>
       <h2>We need your support</h2>
-      <p>Syzygy is a non-profit organization powered entirely by the support of people like you! You can help us continue to run events and provide resources to the local arts community by signing up to donate monthly. You can cancel at any time.</p>
-      <p>If you'd rather make a one-time donation, you can do that too! Anything helps.</p>
+      <p>
+        Syzygy is a non-profit organization powered entirely by the support of
+        people like you! You can help us continue to run events and provide
+        resources to the local arts community by signing up to donate monthly.
+        You can cancel at any time.
+      </p>
+      <p>
+        If you'd rather make a one-time donation, you can do that too! Anything
+        helps.
+      </p>
       <div class="text-center">
-        <a class="btn bg-red-700 text-white font-bold" href="https://checkout.square.site/merchant/ML1VKVYXB3VR6/checkout/HEH6NHLQLII5CWSTXWYK3GCU">Donate now</a>
+        <a
+          class="btn bg-red-700 text-white font-bold"
+          href="https://checkout.square.site/merchant/ML1VKVYXB3VR6/checkout/HEH6NHLQLII5CWSTXWYK3GCU"
+          >Donate now</a
+        >
+        <a class="btn font-bold" href="./join">or become a member</a>
       </div>
     </Prose>
   </Section>
 </Layout>
-
