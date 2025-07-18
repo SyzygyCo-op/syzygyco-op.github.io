@@ -9,56 +9,78 @@ import { getCollection } from "astro:content";
 import { rowClassName } from "../utils";
 
 const events = await getCollection("events");
-
 ---
 
 <Section fullWidth id="events">
-    <Section noSpace>
-      <Prose>
-        <h2>Events</h2>
-        <h3>Special Events</h3>
-      </Prose>
-    </Section>
-
-    <!-- Need to add is:inline to the script tag to avoid CORS issues with the SimpleTix widget due to some Astro magic -->
-    <script src='https://embed.prod.simpletix.com/assets/widget/widget.min.js?t=2025.02.19' is:inline></script>
-
-    <Section size="large" noSpace>
-      <div class="smt-pin-board" id="smt_pinBoard">
-        <input type="hidden" value="4774a52b-d36a-4762-ac3b-ca1dcbc3b764" id="smt_hdnApplicationId" />
-
-        <input type="hidden" value="Syzygy Co-op" id="smt_hdnStoreName" />
-
-        <!-- Set the value to 1 to open the event page in a new tab -->
-        <input type="hidden" value="1" id="smt_openEventPageType" />
-
-        <!-- Set the value to 1 to show the event category. I think it looks bad. -->
-        <input type="hidden" value="" id="smt_isDisplayEventCategory" />
-
-        <input type="hidden" value="" id="smt_selectedEventCategories" />
-
-        <input type="hidden" value="Next50" id="smt_displayStyle" />
+  <Section noSpace>
+    <Prose>
+      <h2>Events</h2>
+      <div class="responsive-iframe-container big-container">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=ab5594c927f49b0fdbac6df5105baab13fa8c85a557455199d4ffe8a1e3d2727%40group.calendar.google.com&ctz=America%2FLos_Angeles"
+          style="border: 0"
+          width="800"
+          height="600"
+          frameborder="0"
+          scrolling="no"></iframe>
       </div>
-    </Section>
+      <div class="responsive-iframe-container small-container">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&showPrint=0&mode=AGENDA&title=Syzygy&src=YWI1NTk0YzkyN2Y0OWIwZmRiYWM2ZGY1MTA1YmFhYjEzZmE4Yzg1YTU1NzQ1NTE5OWQ0ZmZlOGExZTNkMjcyN0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d81b60"
+          style="border:solid 1px #777"
+          width="800"
+          height="600"
+          frameborder="0"
+          scrolling="no"></iframe>
+      </div>
 
-    <Section noSpace>
-      <Prose>
-        <h3>Regular Events</h3>
-      </Prose>
-    </Section>
-    <Section size="large" noSpace>
-        <div
-          class={rowClassName}
-        >
-            {events.map((event) => <EventCard event={event} />)}
-        </div>
-    </Section>
+      <h3>Special Events</h3>
+    </Prose>
+  </Section>
+
+  <!-- Need to add is:inline to the script tag to avoid CORS issues with the SimpleTix widget due to some Astro magic -->
+  <script
+    src="https://embed.prod.simpletix.com/assets/widget/widget.min.js?t=2025.02.19"
+    is:inline></script>
+
+  <Section size="large" noSpace>
+    <div class="smt-pin-board" id="smt_pinBoard">
+      <input
+        type="hidden"
+        value="4774a52b-d36a-4762-ac3b-ca1dcbc3b764"
+        id="smt_hdnApplicationId"
+      />
+
+      <input type="hidden" value="Syzygy Co-op" id="smt_hdnStoreName" />
+
+      <!-- Set the value to 1 to open the event page in a new tab -->
+      <input type="hidden" value="1" id="smt_openEventPageType" />
+
+      <!-- Set the value to 1 to show the event category. I think it looks bad. -->
+      <input type="hidden" value="" id="smt_isDisplayEventCategory" />
+
+      <input type="hidden" value="" id="smt_selectedEventCategories" />
+
+      <input type="hidden" value="Next50" id="smt_displayStyle" />
+    </div>
+  </Section>
+
+  <Section noSpace>
+    <Prose>
+      <h3>Regular Events</h3>
+    </Prose>
+  </Section>
+  <Section size="large" noSpace>
+    <div class={rowClassName}>
+      {events.map((event) => <EventCard event={event} />)}
+    </div>
+  </Section>
 </Section>
 
 <script>
   // Hack to make the SimpleTix widget styling consistent with the rest of the site.
   import { rowClassName, cardClassName } from "../utils";
-  const smtPinBoard = document.getElementById('smt_pinBoard');
+  const smtPinBoard = document.getElementById("smt_pinBoard");
 
   function addClassNames(element, classNames) {
     for (const className of classNames.split(" ")) {
@@ -67,11 +89,11 @@ const events = await getCollection("events");
   }
 
   function hackSimpleTixWidgetStyling() {
-    const rows = smtPinBoard.querySelectorAll('.smt-row');
-    for(const row of rows) {
+    const rows = smtPinBoard.querySelectorAll(".smt-row");
+    for (const row of rows) {
       addClassNames(row, rowClassName);
-      const items = row.querySelectorAll('.smt-list-box');
-      for(const item of items) {
+      const items = row.querySelectorAll(".smt-list-box");
+      for (const item of items) {
         addClassNames(item, cardClassName);
       }
     }
@@ -80,8 +102,6 @@ const events = await getCollection("events");
   const observer = new MutationObserver(hackSimpleTixWidgetStyling);
   observer.observe(smtPinBoard, {
     childList: true,
-    subtree: true
+    subtree: true,
   });
-
 </script>
-

@@ -16,7 +16,9 @@ import { rowClassName } from "../utils";
         </Prose>
     </Section>
     <Section size="large" noSpace>
-        <div class={rowClassName}>
+        <div
+            class="w-full grid md:grid-cols-4 lg:grid-cols-5 gap-4 content-center"
+        >
             {members.map((member) => <MemberCard member={member} />)}
         </div>
     </Section>
