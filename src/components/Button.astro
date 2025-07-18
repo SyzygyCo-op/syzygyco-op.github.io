@@ -1,0 +1,32 @@
+---
+import Icon, { type IconPack } from "./Icon.astro";
+
+type Style = "primary" | "secondary";
+
+interface Props {
+    link: string;
+    style?: Style;
+    icon?: string;
+    iconPack?: IconPack;
+}
+
+const { link, icon, iconPack, style = "primary" } = Astro.props;
+let styleClass = "btn ";
+switch (style) {
+    case "primary":
+        styleClass +=
+            "bg-red-700 hover:bg-red-500 active:bg-red-900 text-white font-bold";
+        break;
+    case "secondary":
+        styleClass +=
+            "hover:bg-(--surface-transparent-700) active:bg-(--surface-transparent-300) font-bold";
+        break;
+}
+---
+
+<a class={styleClass} href={link}>
+    <div class="flex items-center gap-1">
+        {icon && <Icon icon={icon} iconPack={iconPack} />}
+        <slot />
+    </div>
+</a>

@@ -1,84 +1,15 @@
 ---
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 const { title } = Astro.props;
-import favicon from "../../content/cosmos-cat.jpg";
-import showPhoto from "../../content/show.gif";
 import Prose from "../components/Prose.astro";
 import Section from "../components/Section.astro";
+import Layout from "./Layout.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/jpeg" href={favicon.src} />
-    <meta name="generator" content={Astro.generator} />
-    <title>
-      {title ? `${title} | ` : ""} Syzygy Artists Co-Op, San Francisco
-    </title>
-    <!--REGION Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Honk&family=Oi&family=Rubik+Moonrocks&family=Rubik+Storm&family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <!--ENDREGION Google Fonts -->
-
-    <!-- Facebook share metadata -->
-    <meta property="og:title" content="Syzygy Artist Co-Op" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="syzygysf.com" />
-    <meta property="og:image" content={showPhoto.src} />
-
-    <!-- Twitter share metadata -->
-    <meta name="twitter:title" content="Syzygy Artist Co-Op" />
-    <meta
-      name="twitter:description"
-      content="A co-op of artists and makers in San Francisco."
-    />
-    <meta name="twitter:image" content={showPhoto.src} />
-    <meta name="twitter:card" content="summary_large_image" />
-  </head>
-  <body class="bg-yellow-100">
-    <div class="sticky top-0 z-1">
-      <nav class="w-full py-2 bg-red-700 text-gray-200 font-bold">
-        <ul class="flex flex-row flex-wrap justify-evenly">
-          <li class="px-1"><a href="/#about">About</a></li>
-          <li class="px-1"><a href="/#events">Events</a></li>
-          <li class="px-1"><a href="/#news">News</a></li>
-          <li class="px-1"><a href="/#contact">Contact</a></li>
-          <li class="px-1"><a href="/#members">Members</a></li>
-          <li class="px-1"><a href="/#supporters">Supporters</a></li>
-        </ul>
-      </nav>
-    </div>
-    <main>
-      <Section>
-        <Prose>
-          <slot />
-        </Prose>
-      </Section>
-    </main>
-    <Footer />
-  </body>
-</html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-  }
-
-  html {
-    height: 100%;
-  }
-
-  main {
-    max-width: 80rem;
-    margin: 0 auto;
-  }
-</style>
+<Layout title={title}>
+  <Section>
+    <Prose>
+      <slot />
+    </Prose>
+  </Section>
+</Layout>

@@ -1,0 +1,15 @@
+---
+// These are fontawesome icons. https://fontawesome.com/search
+
+// Note: icons may not exist in every pack. Check the docs.
+export type IconPack = "solid" | "regular" | "brands" | "light" | "thin";
+
+interface Props {
+    icon: string;
+    iconPack?: IconPack;
+}
+
+const { icon, iconPack = "regular" } = Astro.props;
+---
+
+<i class={`fa-${iconPack} fa-${icon} fa-fw`}></i>
