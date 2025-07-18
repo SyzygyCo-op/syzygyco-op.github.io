@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import Button from "../components/Button.astro";
+---
+
+<Layout title="Links">
+    <Section>
+        <div class="flex flex-col md:flex-row flex-wrap gap-2">
+            <Button
+                link="https://discord.gg/BZrKajyR9V"
+                icon="discord"
+                iconPack="brands">Discord</Button
+            >
+            <Button
+                link="https://calendar.google.com/calendar/embed?src=ab5594c927f49b0fdbac6df5105baab13fa8c85a557455199d4ffe8a1e3d2727%40group.calendar.google.com&ctz=America%2FLos_Angeles"
+                icon="calendar"
+            >
+                Calendar
+            </Button>
+            <Button
+                link="https://bsky.app/profile/syzygysf.com"
+                icon="bluesky"
+                iconPack="brands">BlueSky</Button
+            >
+            <Button
+                link="https://www.instagram.com/syzygycoop"
+                icon="instagram"
+                iconPack="brands">Instagram</Button
+            >
+        </div>
+    </Section>
+</Layout>
