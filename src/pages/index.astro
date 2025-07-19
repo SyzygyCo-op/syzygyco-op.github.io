@@ -7,6 +7,7 @@ import NewsList from "../components/NewsList.astro";
 import Layout from "../layouts/Layout.astro";
 import Prose from "../components/Prose.astro";
 import Section from "../components/Section.astro";
+import Button from "../components/Button.astro";
 
 import { Content as AboutContent } from "./about.md";
 import { Content as ContactContent } from "./contact.md";
@@ -71,13 +72,15 @@ import { Content as ContactContent } from "./contact.md";
         If you'd rather make a one-time donation, you can do that too! Anything
         helps.
       </p>
-      <div class="text-center">
-        <a
-          class="btn bg-red-700 text-white font-bold"
-          href="https://checkout.square.site/merchant/ML1VKVYXB3VR6/checkout/HEH6NHLQLII5CWSTXWYK3GCU"
-          >Donate now</a
+      <div class="flex flex-row flex-wrap align-middle justify-center">
+        <Button
+          link="https://checkout.square.site/merchant/ML1VKVYXB3VR6/checkout/HEH6NHLQLII5CWSTXWYK3GCU"
+          icon="heart"
+          iconPack="solid"
         >
-        <a class="btn font-bold" href="./join">or become a member</a>
+          Donate now
+        </Button>
+        <Button link="/join" style="secondary">or become a member</Button>
       </div>
     </Prose>
   </Section>

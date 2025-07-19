@@ -3,12 +3,28 @@
 @plugin '@tailwindcss/typography';
 
 @layer base {
+    :root {
+        --surface-transparent-700: #FFFFFF44;
+        --surface-transparent-300: #00000044;
+    }
+
     html {
         font-size: 24px;
         font-family: "Zain",
             serif;
         font-weight: 400;
         font-style: normal;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex-grow: 1;
+        width: 100%;
     }
 
     /* region Fonts */
