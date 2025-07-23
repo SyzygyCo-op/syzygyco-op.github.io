@@ -2,27 +2,35 @@
 import { Image } from "astro:assets";
 import Card from "./Card.astro";
 import Prose from "./Prose.astro";
-import { render, type CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import { marked } from "marked";
 
 interface Props {
-    member: CollectionEntry<"members">;
+    imageURL?: string;
+    imageDescription?: string;
+    name?: string;
+    description?: string;
+    date?: string;
 }
 
-const { event } = Astro.props;
-const { Content } = await render(event); // Renders the content of the event entry
+const { imageURL, imageDescription, name, description, date } = Astro.props;
 ---
 
 <Card>
-    <Image
-        src={event.data.image}
-        alt={event.data.imageAlt}
-        class="w-full"
-        slot="header"
-    />
+    {
+        imageURL && (
+            <Image
+                src={imageURL}
+                alt={imageDescription ?? ""}
+                class="w-full"
+                slot="header"
+                inferSize={true}
+            />
+        )
+    }
     <Prose>
-        <h4>{event.data.title}</h4>
-        <i>{event.data.time}</i>
-        <Content />
+        {name && <h4>{name}</h4>}
+        {date && <i>{date}</i>}
+        {description && <Fragment set:html={marked(description)} />}
     </Prose>
 </Card>
-
