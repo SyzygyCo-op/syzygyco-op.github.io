@@ -1,14 +1,24 @@
 ---
+import { rowClassName } from "../utils";
 import NewsCard from "./NewsCard.astro";
-import Section from "./Section.astro";
-import Prose from "./Prose.astro";
 import { getCollection } from "astro:content";
+import Section from "./Section.astro";
 
-const news = await getCollection("news");
+const newsCollection = await getCollection("news");
+const news = newsCollection.map((item) => item.data);
 ---
 
-<div
-    class="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-4 content-center"
->
-    {news.map((item) => <NewsCard news={item} />)}
+<div class={rowClassName}>
+    {
+        news.map((item) => (
+            <NewsCard
+                imageURL={item["Image URL"]}
+                imageDescription={item["Image Description"]}
+                name={item.Name}
+                date={item.Date}
+                description={item.Description}
+                linkURL={item["Link URL"]}
+            />
+        ))
+    }
 </div>

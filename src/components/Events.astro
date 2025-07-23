@@ -1,5 +1,4 @@
 ---
-import Section from "./Section.astro";
 import Prose from "./Prose.astro";
 import "../styles/simpletix-widget.css";
 
@@ -11,39 +10,36 @@ const specialEvents = await getCollection("specialEvents");
 const recurringEvents = await getCollection("recurringEvents");
 ---
 
-<Section id="special-events">
-  <Prose>
-    <h2>Special Events</h2>
-    <div class={rowClassName}>
-      {
-        specialEvents.map((event) => (
-          <EventCard
-            imageURL={event.data["Image URL"]}
-            imageDescription={event.data["Image Description"]}
-            name={event.data.Name}
-            date={event.data.Date}
-            description={event.data.Description}
-          />
-        ))
-      }
-    </div>
-  </Prose>
-</Section>
-<Section id="recurring-events">
-  <Prose>
-    <h2>Recurring Events</h2>
-    <div class={rowClassName}>
-      {
-        recurringEvents.map((event) => (
-          <EventCard
-            imageURL={event.data["Image URL"]}
-            imageDescription={event.data["Image Description"]}
-            name={event.data.Name}
-            date={event.data.Date}
-            description={event.data.Description}
-          />
-        ))
-      }
-    </div>
-  </Prose>
-</Section>
+<Prose>
+  <h2>Special Events</h2>
+</Prose>
+<div class={rowClassName}>
+  {
+    specialEvents.map((event) => (
+      <EventCard
+        imageURL={event.data["Image URL"]}
+        imageDescription={event.data["Image Description"]}
+        name={event.data.Name}
+        date={event.data.Date}
+        description={event.data.Description}
+      />
+    ))
+  }
+</div>
+
+<Prose>
+  <h2>Recurring Events</h2>
+</Prose>
+<div class={rowClassName}>
+  {
+    recurringEvents.map((event) => (
+      <EventCard
+        imageURL={event.data["Image URL"]}
+        imageDescription={event.data["Image Description"]}
+        name={event.data.Name}
+        date={event.data.Date}
+        description={event.data.Description}
+      />
+    ))
+  }
+</div>

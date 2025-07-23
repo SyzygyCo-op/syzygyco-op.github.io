@@ -1,10 +1,44 @@
 ---
 import { cardClassName } from "../utils";
+
+type CardStyle = "default" | "ghost";
+
+interface Props {
+    linkURL?: string;
+    cardStyle?: CardStyle;
+}
+
+const { linkURL, cardStyle = "default" } = Astro.props;
+const baseClass = "border flex-shrink";
+let styleClass = "";
+switch (cardStyle) {
+    case "ghost":
+        styleClass =
+            "border-gray-300 border-2 border-dashed bg-(--surface-transparent-700) hover:bg-(--surface-transparent-900)";
+        break;
+    default:
+        styleClass = "border-gray-200 bg-(--surface-transparent-900)";
+        break;
+}
+const combinedStyle = `${baseClass} ${styleClass}`;
 ---
-<div class={cardClassName}>
-    <slot name="header" />
-    <div class="p-4">
-        <slot />
-    </div>
-    <slot name="footer" />
-</div>
+
+{
+    linkURL ? (
+        <a class={combinedStyle} href={linkURL} target="blank">
+            <slot name="header" />
+            <div class="p-4">
+                <slot />
+            </div>
+            <slot name="footer" />
+        </a>
+    ) : (
+        <div class={combinedStyle}>
+            <slot name="header" />
+            <div class="p-4">
+                <slot />
+            </div>
+            <slot name="footer" />
+        </div>
+    )
+}

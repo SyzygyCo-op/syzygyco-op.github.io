@@ -36,41 +36,13 @@ import { Content as ContactContent } from "./contact.md";
       Syzygy SF
     </h1>
   </Section>
-  <Section id="about">
-    <Prose>
-      <AboutContent />
-    </Prose>
-  </Section>
-  <Events />
-  <Section fullWidth id="news">
-    <!-- A section for news about Syzygy, either from the co-op itself or external news organizations.  -->
-    <Section noSpace>
-      <Prose>
-        <h2>News!</h2>
-      </Prose>
-    </Section>
-    <Section size="large" noSpace>
-      <NewsList />
-    </Section>
-  </Section>
-  <Section id="contact">
-    <Prose>
-      <ContactContent />
-    </Prose>
-  </Section>
-  <MembersList />
   <Section id="supporters">
     <Prose>
       <h2>We need your support</h2>
       <p>
-        Syzygy is a non-profit organization powered entirely by the support of
-        people like you! You can help us continue to run events and provide
-        resources to the local arts community by signing up to donate monthly.
-        You can cancel at any time.
-      </p>
-      <p>
-        If you'd rather make a one-time donation, you can do that too! Anything
-        helps.
+        You can help us continue to run events and provide resources to the
+        local arts community of San Francisco. Syzygy is a non-profit
+        organization powered entirely by the support of people like you!
       </p>
       <div class="flex flex-row flex-wrap align-middle justify-center">
         <Button
@@ -83,5 +55,54 @@ import { Content as ContactContent } from "./contact.md";
         <Button link="/join" style="secondary">or become a member</Button>
       </div>
     </Prose>
+  </Section>
+  <Section id="about">
+    <Prose>
+      <AboutContent />
+    </Prose>
+  </Section>
+  <Section id="calendar">
+    <Prose>
+      <h2>Calendar</h2>
+      <div class="responsive-iframe-container big-container">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=ab5594c927f49b0fdbac6df5105baab13fa8c85a557455199d4ffe8a1e3d2727%40group.calendar.google.com&ctz=America%2FLos_Angeles"
+          style="border: 0"
+          width="800"
+          height="600"
+          frameborder="0"
+          scrolling="no"></iframe>
+      </div>
+      <div class="responsive-iframe-container small-container">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FLos_Angeles&showPrint=0&mode=AGENDA&title=Syzygy&src=YWI1NTk0YzkyN2Y0OWIwZmRiYWM2ZGY1MTA1YmFhYjEzZmE4Yzg1YTU1NzQ1NTE5OWQ0ZmZlOGExZTNkMjcyN0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23d81b60"
+          style="border:solid 1px #777"
+          width="800"
+          height="600"
+          frameborder="0"
+          scrolling="no"></iframe>
+      </div>
+    </Prose>
+  </Section>
+  <Section id="events">
+    <Events />
+  </Section>
+  <Section id="news">
+    <!-- A section for news about Syzygy, either from the co-op itself or external news organizations.  -->
+    <Prose>
+      <h2>News!</h2>
+    </Prose>
+    <NewsList />
+  </Section>
+  <Section id="contact">
+    <Prose>
+      <ContactContent />
+    </Prose>
+  </Section>
+  <Section id="members">
+    <Prose>
+      <h2>Members</h2>
+    </Prose>
+    <MembersList />
   </Section>
 </Layout>
