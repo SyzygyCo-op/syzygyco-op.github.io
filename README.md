@@ -1,3 +1,5 @@
+[![Deploy Astro site to Pages](https://github.com/SyzygyCo-op/syzygyco-op.github.io/actions/workflows/astro.yml/badge.svg?branch=main)](https://github.com/SyzygyCo-op/syzygyco-op.github.io/actions/workflows/astro.yml)
+
 <h1><a href="https://syzygyco-op.github.io">syzygyco-op.github.io</a></h1>
 
 A simple public website for Syzygy.
