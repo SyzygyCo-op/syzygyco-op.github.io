@@ -1,5 +1,4 @@
 ---
-import { combineClasses } from "../lib/cssClasses";
 import { cardClassName } from "../utils";
 
 type CardStyle = "default" | "ghost";
@@ -10,18 +9,18 @@ interface Props {
 }
 
 const { linkURL, cardStyle = "default" } = Astro.props;
-const baseClass = "border";
+const baseClass = "border flex-shrink";
 let styleClass = "";
 switch (cardStyle) {
     case "ghost":
         styleClass =
-            "border-gray-300 border-2 border-dashed bg-grey-50 hover:bg-white";
+            "border-gray-300 border-2 border-dashed bg-(--surface-transparent-700) hover:bg-(--surface-transparent-900)";
         break;
     default:
-        styleClass = "border-gray-200 bg-gray-50";
+        styleClass = "border-gray-200 bg-(--surface-transparent-900)";
         break;
 }
-const combinedStyle = combineClasses(baseClass, styleClass);
+const combinedStyle = `${baseClass} ${styleClass}`;
 ---
 
 {

@@ -1,32 +1,25 @@
 ---
-import Column from "./containers/Column.astro";
 import Prose from "./Prose.astro";
-import Row from "./containers/Row.astro";
+import Section from "./Section.astro";
 ---
 
-<Prose>
-    <h2>Contact info</h2>
-</Prose>
-<Row minSize="md">
-    <Column extraClass="flex-grow">
-        <Prose>
-            <h3>We are located at</h3>
+<Section id="contact">
+    <Prose>
+        <h2>Contact info</h2>
 
-            <address>
-                395 South Van Ness Ave<br />
-                San Francisco, CA 94103
-            </address>
+        <h3>We are located at</h3>
 
-            <p>And open during public events and by appointment.</p>
-        </Prose>
-    </Column>
-    <Column extraClass="flex-grow">
-        <Prose>
-            <h3>Online presence</h3>
-            <p>
-                Chat us up on <a href="https://discord.gg/8kK2d7Mb">Discord</a> or
-                <a href="mailto:someone@syzygysf.com">write us weird emails</a>!
-            </p>
-        </Prose>
-    </Column>
-</Row>
+        <address>
+            395 South Van Ness Ave<br />
+            San Francisco, CA 94103
+        </address>
+
+        <p>And open during public events and by appointment.</p>
+
+        <h3>Online presence</h3>
+        <p>
+            Chat us up on <a href="https://discord.gg/8kK2d7Mb">Discord</a> or
+            <a href="mailto:someone@syzygysf.com">write us weird emails</a>!
+        </p>
+    </Prose>
+</Section>
