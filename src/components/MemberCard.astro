@@ -1,25 +1,20 @@
 ---
-import { Image } from "astro:assets";
-import Card from "./Card.astro";
-import Prose from "./Prose.astro";
 import type { CollectionEntry } from "astro:content";
+import Polaroid from "./containers/Polaroid.astro";
 
 interface Props {
     member: CollectionEntry<"members">;
 }
 
 const { member } = Astro.props;
-const { pronouns, name, photo } = member.data;
+const { name, photo } = member.data;
 ---
 
-<Card>
-    <Image
-        src={photo}
-        alt={name}
-        class="w-full aspect-square object-cover object-center"
-        slot="header"
-    />
-    <Prose>
-        <h3><a href={`/members/${member.id}`}>{name}</a></h3>
-    </Prose>
-</Card>
+<Polaroid
+    imageSrc={photo}
+    imageDescription={name}
+    linkUrl={`/members/${member.id}`}
+    randomRotationDegrees={3}
+>
+    {name}
+</Polaroid>
