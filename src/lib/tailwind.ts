@@ -1,0 +1,1 @@
+export type Sizes = "xxs" | "xs" | "s" | "md" | "lg" | "xl" | "xxl"
