@@ -1,17 +1,29 @@
 ---
 import MemberCard from "./MemberCard.astro";
 import { getCollection } from "astro:content";
-import Card from "./Card.astro";
-import { Image } from "astro:assets";
 import andYouImage from "../../content/members/_and_you.png";
+import Polaroid from "./containers/Polaroid.astro";
+import StickyNote from "./containers/StickyNote.astro";
+import Row from "./containers/Row.astro";
+import Column from "./containers/Column.astro";
 
 const members = await getCollection("members");
 ---
 
-<div class="w-full grid md:grid-cols-4 lg:grid-cols-5 gap-4 content-center">
-    {members.map((member) => <MemberCard member={member} />)}
-    <Card linkURL="/join" cardStyle="ghost">
-        <Image src={andYouImage} alt="A drawing of a goblin" />
-        <p>and you?</p>
-    </Card>
-</div>
+<Column gap={2}>
+    <Row>
+        <StickyNote randomRotationDegrees={3} extraClass="bg-yellow-100">
+            Members
+        </StickyNote>
+    </Row>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        {members.map((member) => <MemberCard member={member} />)}
+        <Polaroid
+            imageSrc={andYouImage}
+            imageDescription="A drawing of a goblin"
+            linkUrl="/join"
+        >
+            and you?
+        </Polaroid>
+    </div>
+</Column>

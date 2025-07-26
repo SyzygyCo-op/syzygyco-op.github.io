@@ -1,45 +1,49 @@
 ---
 import Prose from "./Prose.astro";
+import Section from "./Section.astro";
 import "../styles/simpletix-widget.css";
 
 import { getCollection } from "astro:content";
 import EventCard from "./EventCard.astro";
-import { rowClassName } from "../utils";
 
 const specialEvents = await getCollection("specialEvents");
 const recurringEvents = await getCollection("recurringEvents");
 ---
 
-<Prose>
-  <h2>Special Events</h2>
-</Prose>
-<div class={rowClassName}>
-  {
-    specialEvents.map((event) => (
-      <EventCard
-        imageURL={event.data["Image URL"]}
-        imageDescription={event.data["Image Description"]}
-        name={event.data.Name}
-        date={event.data.Date}
-        description={event.data.Description}
-      />
-    ))
-  }
-</div>
+<Section>
+  <Prose>
+    <h2>Special Events</h2>
+  </Prose>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+    {
+      specialEvents.map((event) => (
+        <EventCard
+          imageURL={event.data["Image URL"]}
+          imageDescription={event.data["Image Description"]}
+          name={event.data.Name}
+          date={event.data.Date}
+          description={event.data.Description}
+        />
+      ))
+    }
+  </div>
+</Section>
 
-<Prose>
-  <h2>Recurring Events</h2>
-</Prose>
-<div class={rowClassName}>
-  {
-    recurringEvents.map((event) => (
-      <EventCard
-        imageURL={event.data["Image URL"]}
-        imageDescription={event.data["Image Description"]}
-        name={event.data.Name}
-        date={event.data.Date}
-        description={event.data.Description}
-      />
-    ))
-  }
-</div>
+<Section>
+  <Prose>
+    <h2>Recurring Events</h2>
+  </Prose>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+    {
+      recurringEvents.map((event) => (
+        <EventCard
+          imageURL={event.data["Image URL"]}
+          imageDescription={event.data["Image Description"]}
+          name={event.data.Name}
+          date={event.data.Date}
+          description={event.data.Description}
+        />
+      ))
+    }
+  </div>
+</Section>

@@ -1,0 +1,25 @@
+---
+import { combineClasses } from "../../lib/cssClasses";
+
+interface Props {
+    minSize?: "xxs" | "xs" | "s" | "md" | "lg" | "xl" | "xxl";
+    extraClass?: string;
+}
+
+const { minSize, extraClass = "" } = Astro.props;
+const baseClass = `flex full-width`;
+const minSizeClass = minSize ? `flex-col ${minSize}:flex-row` : "flex-row";
+const justifyClass = `justify-stretch`;
+const justifyItemsClass = `justify-items-stretch`;
+const finalClass = combineClasses(
+    baseClass,
+    minSizeClass,
+    justifyClass,
+    justifyItemsClass,
+    extraClass,
+);
+---
+
+<div class={finalClass}>
+    <slot />
+</div>
