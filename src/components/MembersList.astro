@@ -12,11 +12,11 @@ const members = await getCollection("members");
 
 <Column gap={2}>
     <Row>
-        <StickyNote randomRotationDegrees={3} extraClass="bg-yellow-100"
-            >Members</StickyNote
-        >
+        <StickyNote randomRotationDegrees={3} extraClass="bg-yellow-100">
+            Members
+        </StickyNote>
     </Row>
-    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-2">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {members.map((member) => <MemberCard member={member} />)}
         <Polaroid
             imageSrc={andYouImage}
