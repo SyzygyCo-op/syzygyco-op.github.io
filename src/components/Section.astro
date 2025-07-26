@@ -1,26 +1,30 @@
 ---
+import { combineClasses } from "../lib/cssClasses";
+
 interface Props {
     id?: string;
-    background?: string;
-    size?: "large";
-    fullWidth?: boolean;
-    noSpace?: boolean;
+    backgroundClass?: string;
+    extraClass?: string;
 }
 
-const { size, background, id, noSpace, fullWidth } = Astro.props;
+const { backgroundClass, id, extraClass } = Astro.props;
 
-let baseClass = noSpace ? "" : "my-8 ";
+let baseClass = "py-8";
 
-const containerClass = fullWidth
-    ? "w-full"
-    : size === "large"
-      ? "mx-4 md:mx-[1rem] lg:mx-[2rem] xl:mx-[3rem] 2xl:mx-[4rem]"
-      : "mx-4 md:mx-[2rem] lg:mx-[4rem] xl:mx-[6rem] 2xl:mx-[8rem]";
-const backgroundClass = background ? `bg-${background} bg-repeat` : "";
+const finalBackgroundClass = backgroundClass
+    ? backgroundClass
+    : "bg-blue-50 bg-repeat";
+const containerClass =
+    "mx-4 md:mx-[2rem] lg:mx-[4rem] xl:mx-[6rem] 2xl:mx-[8rem]";
+const finalContainerClass = combineClasses(
+    baseClass,
+    containerClass,
+    extraClass,
+);
 ---
 
-<div class={backgroundClass} id={id}>
-    <div class={baseClass + containerClass}>
+<div class={finalBackgroundClass} id={id}>
+    <div class={finalContainerClass}>
         <slot />
     </div>
 </div>

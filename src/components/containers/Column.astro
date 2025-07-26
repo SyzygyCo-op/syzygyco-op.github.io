@@ -1,0 +1,17 @@
+---
+import { combineClasses } from "../../lib/cssClasses";
+
+interface Props {
+    gap?: number;
+    extraClass?: string;
+}
+
+const { gap, extraClass = "" } = Astro.props;
+const baseClass = "flex flex-col";
+const gapClass = gap ? `gap-${gap}` : null;
+const finalClass = combineClasses(baseClass, gapClass, extraClass);
+---
+
+<div class={finalClass}>
+    <slot />
+</div>

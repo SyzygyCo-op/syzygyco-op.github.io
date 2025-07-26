@@ -10,7 +10,6 @@ import Section from "../components/Section.astro";
 import Button from "../components/Button.astro";
 
 import { Content as AboutContent } from "./about.md";
-import { Content as ContactContent } from "./contact.md";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -29,15 +28,13 @@ import { Content as ContactContent } from "./contact.md";
   For more information on particular tags, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element.
 -->
 <Layout>
-  <Section id="syzygy">
-    <h1
-      class="oi-regular text-center text-red-700 text-3xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl"
-    >
-      Syzygy SF
-    </h1>
-  </Section>
   <Section id="supporters">
     <Prose>
+      <p
+        class="oi-regular text-center text-red-700 text-3xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl"
+      >
+        Syzygy SF
+      </p>
       <h2>We need your support</h2>
       <p>
         You can help us continue to run events and provide resources to the
@@ -84,9 +81,9 @@ import { Content as ContactContent } from "./contact.md";
       </div>
     </Prose>
   </Section>
-  <Section id="events">
+  <section id="events">
     <Events />
-  </Section>
+  </section>
   <Section id="news">
     <!-- A section for news about Syzygy, either from the co-op itself or external news organizations.  -->
     <Prose>
@@ -95,14 +92,9 @@ import { Content as ContactContent } from "./contact.md";
     <NewsList />
   </Section>
   <Section id="contact">
-    <Prose>
-      <ContactContent />
-    </Prose>
+    <Contact />
   </Section>
-  <Section id="members">
-    <Prose>
-      <h2>Members</h2>
-    </Prose>
+  <Section id="members" backgroundClass="bg-[url(/wood_pattern.png)]">
     <MembersList />
   </Section>
 </Layout>
