@@ -1,4 +1,12 @@
 ---
+interface Props {
+    id?: string;
+    background?: string;
+    size?: "large";
+    fullWidth?: boolean;
+    noSpace?: boolean;
+}
+
 const { size, background, id, noSpace, fullWidth } = Astro.props;
 
 let baseClass = noSpace ? "" : "my-8 ";

@@ -1,30 +1,17 @@
 ---
 import MemberCard from "./MemberCard.astro";
-import Section from "./Section.astro";
-import Prose from "./Prose.astro";
 import { getCollection } from "astro:content";
+import Card from "./Card.astro";
+import { Image } from "astro:assets";
+import andYouImage from "../../content/members/_and_you.png";
 
 const members = await getCollection("members");
-
-import { rowClassName } from "../utils";
 ---
 
-<Section fullWidth>
-    <Section id="members" noSpace>
-        <Prose>
-            <h2>Members</h2>
-        </Prose>
-    </Section>
-    <Section size="large" noSpace>
-        <div
-            class="w-full grid md:grid-cols-4 lg:grid-cols-5 gap-4 content-center"
-        >
-            {members.map((member) => <MemberCard member={member} />)}
-        </div>
-    </Section>
-    <Section noSpace>
-        <Prose>
-            <p>&hellip; <a href="/join">and you?</a></p>
-        </Prose>
-    </Section>
-</Section>
+<div class="w-full grid md:grid-cols-4 lg:grid-cols-5 gap-4 content-center">
+    {members.map((member) => <MemberCard member={member} />)}
+    <Card linkURL="/join" cardStyle="ghost">
+        <Image src={andYouImage} alt="A drawing of a goblin" />
+        <p>and you?</p>
+    </Card>
+</div>
