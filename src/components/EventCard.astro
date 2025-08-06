@@ -8,11 +8,13 @@ interface Props {
     imageURL?: string;
     imageDescription?: string;
     name?: string;
+    eventLink?: string;
     description?: string;
     date?: string;
 }
 
-const { imageURL, imageDescription, name, description, date } = Astro.props;
+const { eventLink, imageURL, imageDescription, name, description, date } =
+    Astro.props;
 ---
 
 <Card>
@@ -28,7 +30,13 @@ const { imageURL, imageDescription, name, description, date } = Astro.props;
         )
     }
     <Prose>
-        {name && <h4>{name}</h4>}
+        {
+            name && (
+                <a href={eventLink}>
+                    <h4>{name}</h4>
+                </a>
+            )
+        }
         {date && <i>{date}</i>}
         {description && <Fragment set:html={marked(description)} />}
     </Prose>

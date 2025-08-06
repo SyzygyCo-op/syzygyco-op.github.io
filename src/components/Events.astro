@@ -18,6 +18,7 @@ const recurringEvents = await getCollection("recurringEvents");
     {
       specialEvents.map((event) => (
         <EventCard
+          eventLink={`/events/${event.id}`}
           imageURL={event.data["Image URL"]}
           imageDescription={event.data["Image Description"]}
           name={event.data.Name}
@@ -37,6 +38,7 @@ const recurringEvents = await getCollection("recurringEvents");
     {
       recurringEvents.map((event) => (
         <EventCard
+          eventLink={`/events/${event.id}`}
           imageURL={event.data["Image URL"]}
           imageDescription={event.data["Image Description"]}
           name={event.data.Name}

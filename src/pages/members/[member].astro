@@ -7,16 +7,17 @@ import Section from "../../components/Section.astro";
 import Prose from "../../components/Prose.astro";
 
 export async function getStaticPaths() {
-  const arr = await getCollection("members");
-  const associative = getAssociativeCollection(arr, "id");
-  return arr.map((member) => ({
-    params: { member: member.id },
-    props: associative[member.id],
+  const members = await getCollection("members");
+  return members.map((member) => ({
+    params: {
+      member: member.id,
+    },
+    props: member,
   }));
 }
 
 const { name, pronouns, photo } = Astro.props.data;
-const { html } = Astro.props.rendered;
+const { html } = Astro.props.rendered ?? { html: "" };
 ---
 
 <Layout title={name}>

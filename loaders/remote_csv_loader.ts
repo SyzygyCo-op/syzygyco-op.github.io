@@ -46,19 +46,20 @@ export function remoteCSVLoader({
             for (let row = 0; row < records.length; row++){
                 const id = row.toString()
                 const record = records[row]
-                const unvalidated: any = {}
+                const unvalidatedData: any = {}
                 for (let col = 0; col < columns.length; col++) {
                     const column = columns[col]
-                    unvalidated[column] = record[col]
+                    unvalidatedData[column] = record[col]
                 }
-                const data = await parseData({
+                const parsedData = await parseData({
                     id,
-                    data: unvalidated,
+                    data: unvalidatedData,
                 })
-                if (!isObjectEmpty(data)) {
+                if (!isObjectEmpty(parsedData)) {
+                    const actualId = (parsedData['id'] ?? parsedData['Id'] ?? id)
                     store.set({
-                        id,
-                        data,
+                        id: actualId,
+                        data: parsedData,
                     })
                 }
             }

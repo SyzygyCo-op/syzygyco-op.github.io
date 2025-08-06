@@ -1,0 +1,75 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Prose from "../../components/Prose.astro";
+import Section from "../../components/Section.astro";
+import { marked } from "marked";
+import Row from "../../components/containers/Row.astro";
+import Column from "../../components/containers/Column.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+    const specialEvents = await getCollection("specialEvents");
+    const recurringEvents = await getCollection("recurringEvents");
+
+    const specialEventPaths = specialEvents.map((event) => ({
+        params: {
+            event: event.id,
+        },
+        props: {
+            imageURL: event.data["Image URL"],
+            imageDescription: event.data["Image Description"],
+            name: event.data.Name,
+            date: event.data.Date,
+            description: event.data.Description,
+        },
+    }));
+
+    const recurringEventPaths = recurringEvents.map((event) => ({
+        params: {
+            event: event.id,
+        },
+        props: {
+            imageURL: event.data["Image URL"],
+            imageDescription: event.data["Image Description"],
+            name: event.data.Name,
+            date: event.data.Date,
+            description: event.data.Description,
+        },
+    }));
+
+    return [...specialEventPaths, ...recurringEventPaths];
+}
+
+const {
+    name = "Untitled Event",
+    description,
+    date,
+    imageURL,
+    imageDescription,
+} = Astro.props;
+---
+
+<Layout>
+    <Section>
+        <Prose>
+            <Row minSize="md" extraClass="items-start">
+                {
+                    imageURL && (
+                        <Image
+                            class="w-full md:pr-4 align-top"
+                            src={imageURL}
+                            alt={imageDescription ?? ""}
+                            inferSize={true}
+                        />
+                    )
+                }
+                <Column extraClass="w-full">
+                    <h2>{name}</h2>
+                    {date && <i>{date}</i>}
+                    {description && <Fragment set:html={marked(description)} />}
+                </Column>
+            </Row>
+        </Prose>
+    </Section>
+</Layout>

@@ -1,6 +1,3 @@
-
-import { type DataEntryMap } from "astro:content";
-
 export function getAssociativeCollection<Item extends {}>(
   collection: Item[],
   key: keyof Item,
