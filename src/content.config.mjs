@@ -20,6 +20,7 @@ const specialEvents = defineCollection({
         url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=548759105&single=true&output=csv',
     }),
     schema: () => z.object({
+        'Id': z.optional(z.string()),
         'Name': z.optional(z.string()),
         'Description': z.optional(z.string()),
         'Date': z.optional(z.string()),
@@ -33,6 +34,7 @@ const recurringEvents = defineCollection({
         url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=0&single=true&output=csv'
     }),
     schema: () => z.object({
+        'Id': z.optional(z.string()),
         'Name': z.optional(z.string()),
         'Description': z.optional(z.string()),
         'Date': z.optional(z.string()),

@@ -1,7 +1,7 @@
 ---
 image: ./jams.webp
 imageAlt: Musicians playing together
-title: Jams Night
+title: Jam Night
 time: Every Monday, 8-10pm
 ---
 
