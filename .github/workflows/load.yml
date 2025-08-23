@@ -1,0 +1,104 @@
+name: Load remote data
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "load"
+  cancel-in-progress: true
+
+env:
+#   BUILD_PATH: "." # default value when not using subfolders
+  BUILD_PATH: scripts
+
+jobs:
+  build:
+    name: Load
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=yarn" >> $GITHUB_OUTPUT
+            echo "lockfile=yarn.lock" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/package.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            echo "lockfile=package-lock.json" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Unable to determine package manager"
+            exit 1
+          fi
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+          cache-dependency-path: ${{ env.BUILD_PATH }}/${{ steps.detect-package-manager.outputs.lockfile }}
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Install dependencies
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        working-directory: ${{ env.BUILD_PATH }}
+      - name: Load data
+        run: |
+          ${{ steps.detect-package-manager.outputs.runner }} load
+        working-directory: ${{ env.BUILD_PATH }}
+      - name: Commit data
+        uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+        with:
+            # The arguments for the `git add` command (see the paragraph below for more info)
+            # Default: '.'
+            add: '.'
+
+            # The name of the user that will be displayed as the author of the commit.
+            # Default: depends on the default_author input
+            author_name: Syzygy CI
+
+            # The email of the user that will be displayed as the author of the commit.
+            # Default: depends on the default_author input
+            author_email: someone@syzygysf.com
+
+            # Determines the way the action fills missing author name and email. Three options are available:
+            # - github_actor -> UserName <UserName@users.noreply.github.com>
+            # - user_info -> Your Display Name <your-actual@email.com>
+            # - github_actions -> github-actions <email associated with the github logo>
+            # Default: github_actor
+            default_author: github_actor
+
+            # The message for the commit.
+            # Default: 'Commit from GitHub Actions (name of the workflow)'
+            message: '(CI) Load data'
+
+            # The way the action should handle pathspec errors from the add and remove commands. Three options are available:
+            # - ignore -> errors will be logged but the step won't fail
+            # - exitImmediately -> the action will stop right away, and the step will fail
+            # - exitAtEnd -> the action will go on, every pathspec error will be logged at the end, the step will fail.
+            # Default: ignore
+            pathspec_error_handling: exitImmediately
+
+            # Arguments for the git pull command. By default, the action does not pull.
+            # Default: ''
+            pull: '--rebase'
+
+            # Whether to push the commit and, if any, its tags to the repo. It can also be used to set the git push arguments (see the paragraph below for more info)
+            # Default: true
+            push: true
