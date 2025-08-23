@@ -1,0 +1,141 @@
+---
+import Button from "../components/Button.astro";
+import Layout from "../layouts/Layout.astro";
+import Prose from "../components/Prose.astro";
+import Section from "../components/Section.astro";
+import { getStaticPaths as getEventPaths } from "./events/[event].astro";
+import { getStaticPaths as getMemberPaths } from "./members/[member].astro";
+
+export const prerender = true;
+
+const eventPaths = await getEventPaths();
+const memberPaths = await getMemberPaths();
+
+const paths: string[] = [];
+const modules: any[] = await Promise.all(
+    Object.values(import.meta.glob(["./**/*.astro", "./**/*.md"])).map((fn) =>
+        fn(),
+    ),
+);
+for (let module of modules) {
+    if (module.getStaticPaths === undefined) {
+        if (module.url !== "") {
+            paths.push(module.url);
+        }
+        continue;
+    }
+    const staticPaths = await module.getStaticPaths();
+    for (let path of staticPaths) {
+        let resolvedPath: string = module.url;
+        for (let param of Object.keys(path.params)) {
+            resolvedPath = resolvedPath.replace(
+                `[${param}]`,
+                path.params[param],
+            );
+        }
+        paths.push(resolvedPath);
+    }
+}
+---
+
+<Layout title="Links">
+    <Section>
+        <Prose>
+            <h2>Uhhhh... We couldn't find that page.</h2>
+            <p id="404_help_message"></p>
+            <p id="similar_pages_header" style="display: none">Similar pages</p>
+            <ul id="similar_pages" style="display: none"></ul>
+            <Button link="/" style="secondary">Return home</Button>
+
+            <!-- Hacking page lists into content here so we find similar pages dynamically -->
+            <div id="all_paths" style="display: none">
+                {paths.join(",")}
+            </div>
+            <div id="all_events" style="display: none">
+                {eventPaths.map((p) => p.params.event).join(",")}
+            </div>
+            <div id="all_members" style="display: none">
+                {memberPaths.map((p) => p.params.member).join(",")}
+            </div>
+        </Prose>
+    </Section>
+</Layout>
+
+<script>
+    import { similarity } from "../lib/stringSimilarity";
+    function getCollection(id: string): string[] {
+        const elements = document
+            .getElementById(id)
+            ?.innerText?.split(",")
+            .map((e) => e.trim());
+        return elements ?? [];
+    }
+    function closestMatches(
+        s: string,
+        others: string[],
+        minSimilarity: number = 0.7,
+    ): { string: string; similarity: number }[] {
+        const matches = others.map((other) => {
+            const fullMatch = {
+                string: other,
+                similarity: similarity(s, other),
+            };
+
+            const prefixIdx = other.lastIndexOf("/");
+            const slug = other.substring(prefixIdx);
+            const slugMatch = {
+                string: other,
+                similarity: similarity(s, slug),
+            };
+
+            if (fullMatch.similarity >= slugMatch.similarity) {
+                return fullMatch;
+            } else {
+                return slugMatch;
+            }
+        });
+        return matches.filter((m) => m.similarity > minSimilarity);
+    }
+    function setHelpMessage() {
+        const messageEl = document.getElementById("404_help_message");
+        if (!messageEl) return;
+
+        const similarPagesHeaderEl = document.getElementById(
+            "similar_pages_header",
+        );
+        const similarPagesEl = document.getElementById("similar_pages");
+
+        const path = window.location.pathname;
+
+        if (path.match(/\/events\//g)) {
+            let message = "This event may have already happened.";
+            messageEl.innerText = message;
+        }
+
+        if (similarPagesEl) {
+            const paths = getCollection("all_paths");
+
+            const pathMatches = closestMatches(path, paths);
+            const matches = pathMatches.toSorted(
+                (a, b) => b.similarity - a.similarity,
+            );
+            console.log(matches);
+            if (matches.length > 0) {
+                similarPagesHeaderEl?.setAttribute("style", "");
+                similarPagesEl?.setAttribute("style", "");
+                for (let match of matches) {
+                    const linkEl = document.createElement("a");
+                    linkEl.innerText =
+                        match.string === "/"
+                            ? `( Home ) ${match.string}`
+                            : match.string;
+                    linkEl.href = match.string;
+                    const childEl = document.createElement("li");
+                    childEl.appendChild(linkEl);
+                    similarPagesEl.appendChild(childEl);
+                }
+            }
+        }
+    }
+    setHelpMessage();
+</script>

@@ -26,6 +26,10 @@ const specialEvents = defineCollection({
         'Date': z.optional(z.string()),
         'Image URL': z.optional(z.string()),
         'Image Description': z.optional(z.string()),
+        'Start Date': z.optional(z.string()),
+        'Start Time': z.optional(z.string()),
+        'End Date': z.optional(z.string()),
+        'Start Time': z.optional(z.string()),
     })
 })
 
