@@ -1,0 +1,10 @@
+{
+    "name": "syzygy_website_scripts",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "load": "node ./src/load.ts"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
