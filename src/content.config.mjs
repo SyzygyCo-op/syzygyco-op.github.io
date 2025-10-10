@@ -2,7 +2,7 @@
 import { defineCollection, z } from 'astro:content';
 
 // 2. Import loader(s)
-import { glob, file, folder } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 import { remoteCSVLoader } from '../loaders/remote_csv_loader'
 
 // 3. Define your collection(s)
@@ -15,9 +15,17 @@ const members = defineCollection({
     }),
 });
 
+const eventFieldTypes = {
+    'Archived': {
+        type: 'boolean',
+        trueValues: new Set('archived')
+    }
+}
+
 const specialEvents = defineCollection({
     loader: remoteCSVLoader({
         url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=548759105&single=true&output=csv',
+        fieldTypes: eventFieldTypes,
     }),
     schema: () => z.object({
         'Id': z.optional(z.string()),
@@ -30,12 +38,14 @@ const specialEvents = defineCollection({
         'Start Time': z.optional(z.string()),
         'End Date': z.optional(z.string()),
         'Start Time': z.optional(z.string()),
+        "Archived": z.boolean(),
     })
 })
 
 const recurringEvents = defineCollection({
     loader: remoteCSVLoader({
-        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=0&single=true&output=csv'
+        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=0&single=true&output=csv',
+        fieldTypes: eventFieldTypes,
     }),
     schema: () => z.object({
         'Id': z.optional(z.string()),
@@ -44,12 +54,14 @@ const recurringEvents = defineCollection({
         'Date': z.optional(z.string()),
         'Image URL': z.optional(z.string()),
         'Image Description': z.optional(z.string()),
+        "Archived": z.boolean(),
     })
 })
 
 const news = defineCollection({
     loader: remoteCSVLoader({
-        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=209937466&single=true&output=csv'
+        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=209937466&single=true&output=csv',
+        fieldTypes: eventFieldTypes,
     }),
     schema: () => z.object({
         'Name': z.optional(z.string()),
@@ -58,6 +70,7 @@ const news = defineCollection({
         'Image URL': z.optional(z.string()),
         'Image Description': z.optional(z.string()),
         'Link URL': z.optional(z.string()),
+        "Archived": z.boolean(),
     })
 })
 
