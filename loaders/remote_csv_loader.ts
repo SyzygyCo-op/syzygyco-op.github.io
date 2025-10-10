@@ -100,7 +100,6 @@ export function remoteCSVLoader({
                 }
                 const typedUnvalidatedData = applyFieldTypes(fieldTypes, unvalidatedData)
                 logger.info(`TypedData: ${JSON.stringify(typedUnvalidatedData, null, 2)}`)
-                console.log(JSON.stringify(typedUnvalidatedData, null, 2))
                 const parsedData = await parseData({
                     id,
                     data: typedUnvalidatedData,
