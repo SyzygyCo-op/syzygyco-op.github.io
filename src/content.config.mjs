@@ -38,6 +38,7 @@ const specialEvents = defineCollection({
         'Start Time': z.optional(z.string()),
         'End Date': z.optional(z.string()),
         'Start Time': z.optional(z.string()),
+        'Ticket Link': z.optional(z.string()),
         "Archived": z.boolean(),
     })
 })
@@ -54,6 +55,7 @@ const recurringEvents = defineCollection({
         'Date': z.optional(z.string()),
         'Image URL': z.optional(z.string()),
         'Image Description': z.optional(z.string()),
+        'Ticket Link': z.optional(z.string()),
         "Archived": z.boolean(),
     })
 })

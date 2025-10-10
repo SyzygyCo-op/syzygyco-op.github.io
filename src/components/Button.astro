@@ -5,12 +5,13 @@ type Style = "primary" | "secondary";
 
 interface Props {
     link: string;
+    newTab?: boolean;
     style?: Style;
     icon?: string;
     iconPack?: IconPack;
 }
 
-const { link, icon, iconPack, style = "primary" } = Astro.props;
+const { link, newTab = false, icon, iconPack, style = "primary" } = Astro.props;
 let styleClass = "btn ";
 switch (style) {
     case "primary":
@@ -24,7 +25,7 @@ switch (style) {
 }
 ---
 
-<a class={styleClass} href={link}>
+<a class={styleClass} href={link} target={newTab ? "_blank" : undefined}>
     <div class="flex items-center gap-1">
         {icon && <Icon icon={icon} iconPack={iconPack} />}
         <slot />
