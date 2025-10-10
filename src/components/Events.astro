@@ -16,42 +16,45 @@ const recurringEvents = (await getCollection("recurringEvents")).filter(
 );
 ---
 
-<Section>
-  <Prose>
-    <h2>Special Events</h2>
-  </Prose>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-    {
-      specialEvents.map((event) => (
-        <EventCard
-          eventLink={`/events/${event.id}`}
-          imageURL={event.data["Image URL"]}
-          imageDescription={event.data["Image Description"]}
-          name={event.data.Name}
-          date={event.data.Date}
-          description={event.data.Description}
-        />
-      ))
-    }
-  </div>
-</Section>
-
-<Section>
-  <Prose>
-    <h2>Recurring Events</h2>
-  </Prose>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-    {
-      recurringEvents.map((event) => (
-        <EventCard
-          eventLink={`/events/${event.id}`}
-          imageURL={event.data["Image URL"]}
-          imageDescription={event.data["Image Description"]}
-          name={event.data.Name}
-          date={event.data.Date}
-          description={event.data.Description}
-        />
-      ))
-    }
-  </div>
-</Section>
+{
+  specialEvents && specialEvents.length > 0 ? (
+    <Section>
+      <Prose>
+        <h2>Special Events</h2>
+      </Prose>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+        {specialEvents.map((event) => (
+          <EventCard
+            eventLink={`/events/${event.id}`}
+            imageURL={event.data["Image URL"]}
+            imageDescription={event.data["Image Description"]}
+            name={event.data.Name}
+            date={event.data.Date}
+            description={event.data.Description}
+          />
+        ))}
+      </div>
+    </Section>
+  ) : undefined
+}
+{
+  recurringEvents && recurringEvents.length > 0 ? (
+    <Section>
+      <Prose>
+        <h2>Recurring Events</h2>
+      </Prose>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+        {recurringEvents.map((event) => (
+          <EventCard
+            eventLink={`/events/${event.id}`}
+            imageURL={event.data["Image URL"]}
+            imageDescription={event.data["Image Description"]}
+            name={event.data.Name}
+            date={event.data.Date}
+            description={event.data.Description}
+          />
+        ))}
+      </div>
+    </Section>
+  ) : undefined
+}
