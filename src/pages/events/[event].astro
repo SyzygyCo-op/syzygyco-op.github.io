@@ -7,6 +7,7 @@ import { marked } from "marked";
 import Row from "../../components/containers/Row.astro";
 import Column from "../../components/containers/Column.astro";
 import { Image } from "astro:assets";
+import Button from "../../components/Button.astro";
 
 export async function getStaticPaths() {
     const specialEvents = await getCollection("specialEvents");
@@ -22,6 +23,7 @@ export async function getStaticPaths() {
             name: event.data.Name,
             date: event.data.Date,
             description: event.data.Description,
+            ticketLink: event.data["Ticket Link"],
         },
     }));
 
@@ -35,6 +37,7 @@ export async function getStaticPaths() {
             name: event.data.Name,
             date: event.data.Date,
             description: event.data.Description,
+            ticketLink: event.data["Ticket Link"],
         },
     }));
 
@@ -47,6 +50,7 @@ const {
     date,
     imageURL,
     imageDescription,
+    ticketLink,
 } = Astro.props;
 ---
 
@@ -65,8 +69,18 @@ const {
                     )
                 }
                 <Column extraClass="w-full">
-                    <h2>{name}</h2>
-                    {date && <i>{date}</i>}
+                    <h2 class="self-center">{name}</h2>
+                    {date && <i class="self-center">{date}</i>}
+                    {ticketLink && <div class="self-center">
+                            <Button 
+                            link={ticketLink}
+                            newTab
+                            icon="ticket"
+                            iconPack="solid"
+                            >
+                            Buy Tickets
+                            </Button>
+                        </div>}
                     {description && <Fragment set:html={marked(description)} />}
                 </Column>
             </Row>
