@@ -6,11 +6,29 @@ import fs from 'fs'
 interface RemoteCSVLoaderProps {
     url: string
     delimiter: string
+    fieldTypes: FieldTypes
+}
+
+interface StringType {
+    type: 'string'
+}
+
+interface BoolType {
+    type: 'boolean'
+    trueValues?: Set<string>
+    falseValues?: Set<string>
+}
+
+type FieldType = StringType | BoolType
+
+export interface FieldTypes {
+    [fieldName: string]: FieldType | undefined
 }
 
 async function parseCsv(
     csvText: string,
     delimiter: string,
+    fieldTypes: FieldTypes = {},
 ): Promise<any[][]> {
     const records: any[] = []
     const parser = csv.parse(csvText, {
@@ -23,9 +41,38 @@ async function parseCsv(
     return records
 }
 
+function applyFieldTypes(fieldTypes: FieldTypes, record: Partial<Record<string, string>>): Partial<Record<string, any>> {
+    const newRecord: Partial<Record<string, any>> = {
+        ...record,
+    }
+    for (const fieldName in fieldTypes) {
+        const stringValue = record[fieldName]
+        if (stringValue === undefined) continue
+        const fieldType = fieldTypes[fieldName]
+        if (fieldType) {
+            switch (fieldType.type) {
+                case 'boolean':
+                    if (fieldType.trueValues?.has(stringValue) === true) {
+                        newRecord[fieldName] = true
+                    } else if (fieldType.falseValues?.has(stringValue) === true) {
+                        newRecord[fieldName] = false
+                    } else {
+                        newRecord[fieldName] = stringValue.length !== 0
+                    }
+                    break
+                default:
+                    newRecord[fieldName] = stringValue
+                    break
+            }
+        }
+    }
+    return newRecord
+}
+
 export function remoteCSVLoader({
     url,
     delimiter = ',',
+    fieldTypes = {},
 }: RemoteCSVLoaderProps): Loader {
     return {
         name: 'remote-csv-loader',
@@ -37,7 +84,7 @@ export function remoteCSVLoader({
             logger.debug(`Getting sheet text.`)
             const csvText = await csvBlob.text()
             logger.info(`Parsing CSV:\n${csvText}`)
-            const records = await parseCsv(csvText, delimiter)
+            const records = await parseCsv(csvText, delimiter, fieldTypes)
             if (records.length <= 0) throw Error('Remote CSV file is empty!')
             logger.debug(`Inferring columns.`)
             const columns = records.shift()
@@ -46,14 +93,17 @@ export function remoteCSVLoader({
             for (let row = 0; row < records.length; row++){
                 const id = row.toString()
                 const record = records[row]
-                const unvalidatedData: any = {}
+                const unvalidatedData: Partial<Record<string, string>> = {}
                 for (let col = 0; col < columns.length; col++) {
                     const column = columns[col]
                     unvalidatedData[column] = record[col]
                 }
+                const typedUnvalidatedData = applyFieldTypes(fieldTypes, unvalidatedData)
+                logger.info(`TypedData: ${JSON.stringify(typedUnvalidatedData, null, 2)}`)
+                console.log(JSON.stringify(typedUnvalidatedData, null, 2))
                 const parsedData = await parseData({
                     id,
-                    data: unvalidatedData,
+                    data: typedUnvalidatedData,
                 })
                 if (!isObjectEmpty(parsedData)) {
                     const actualId = (parsedData['id'] ?? parsedData['Id'] ?? id)
