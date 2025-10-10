@@ -6,8 +6,14 @@ import "../styles/simpletix-widget.css";
 import { getCollection } from "astro:content";
 import EventCard from "./EventCard.astro";
 
-const specialEvents = await getCollection("specialEvents");
-const recurringEvents = await getCollection("recurringEvents");
+const specialEvents = (await getCollection("specialEvents")).filter((event) => {
+  return !event.data.Archived;
+});
+const recurringEvents = (await getCollection("recurringEvents")).filter(
+  (event) => {
+    return !event.data.Archived;
+  },
+);
 ---
 
 <Section>
