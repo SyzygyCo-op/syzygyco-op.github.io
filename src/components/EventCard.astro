@@ -10,10 +10,11 @@ interface Props {
     name?: string;
     eventLink?: string;
     description?: string;
+    fullDetails?: string;
     date?: string;
 }
 
-const { eventLink, imageURL, imageDescription, name, description, date } =
+const { eventLink, imageURL, imageDescription, name, description, fullDetails, date } =
     Astro.props;
 ---
 

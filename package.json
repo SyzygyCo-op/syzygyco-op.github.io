@@ -15,7 +15,8 @@
     "astro-sheet-loader": "^1.0.5",
     "csv-parse": "^6.1.0",
     "marked": "^16.1.1",
-    "tailwindcss": "^4.0.7"
+    "tailwindcss": "^4.0.7",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16"

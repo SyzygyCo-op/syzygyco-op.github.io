@@ -23,6 +23,7 @@ export async function getStaticPaths() {
             name: event.data.Name,
             date: event.data.Date,
             description: event.data.Description,
+            fullDetails: event.data["Full Details"],
             ticketLink: event.data["Ticket Link"],
         },
     }));
@@ -37,6 +38,7 @@ export async function getStaticPaths() {
             name: event.data.Name,
             date: event.data.Date,
             description: event.data.Description,
+            fullDetails: event.data["Full Details"],
             ticketLink: event.data["Ticket Link"],
         },
     }));
@@ -47,6 +49,7 @@ export async function getStaticPaths() {
 const {
     name = "Untitled Event",
     description,
+    fullDetails,
     date,
     imageURL,
     imageDescription,
@@ -82,6 +85,7 @@ const {
                             </Button>
                         </div>}
                     {description && <Fragment set:html={marked(description)} />}
+                    {fullDetails && <Fragment set:html={marked(fullDetails)} />}
                 </Column>
             </Row>
         </Prose>
