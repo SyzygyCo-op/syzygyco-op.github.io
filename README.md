@@ -17,7 +17,7 @@ Also check out the [Requirements/Design doc](https://docs.google.com/document/d/
 1. Don't commit directly to `main`. Instead, create a new branch for your changes. Unless you're just editing this README or really know what you're doing ;)
 1. Make your changes and commit them to your branch.
 1. Open a pull request to merge your changes into the `main` branch.
-1. GitHub will automatically create a preview of the proposed changes (look for a comment from "github-actions" with a link like <https://syzygyco-op.github.io/pr-preview/pr-sth>). It will take a few minutes after the pull request is created for this to become available. Good idea feary 🧚: [Check how it looks on mobile devices and various screen sizes](https://developer.chrome.com/docs/devtools/device-mode/).
+1. GitHub will automatically create a preview of the proposed changes (look for a comment from "github-actions" with a link like <https://syzygyco-op.github.io/pr-preview/pr-sth>). It will take a few minutes after the pull request is created for this to become available. Good idea fairy 🧚: [Check how it looks on mobile devices and various screen sizes](https://developer.chrome.com/docs/devtools/device-mode/).
 1. Once you're sure your finished, merge your branch into the `main` branch.
 1. Your changes will be automatically deployed to the live site in a few minutes.
 
