@@ -1,0 +1,28 @@
+---
+import type { date } from "astro:schema";
+import { marked } from "marked";
+import Button from "../components/Button.astro";
+import Column from "../components/containers/Column.astro";
+import Row from "../components/containers/Row.astro";
+import Prose from "../components/Prose.astro";
+import Section from "../components/Section.astro";
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const dates = (await getCollection("flipsidePlaylists"))
+    .map((p) => p.data.Date?.replaceAll("/", "-"))
+    .filter((d) => d)
+    .toSorted()
+    .toReversed();
+---
+
+<Layout>
+    <Section>
+        <Prose>
+            <h2>Flipside Playlists</h2>
+            <Column>
+                {dates.map((d) => <a href={`/flipside-playlists/${d}`}>{d}</a>)}
+            </Column>
+        </Prose>
+    </Section>
+</Layout>
