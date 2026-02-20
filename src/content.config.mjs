@@ -76,6 +76,19 @@ const news = defineCollection({
     })
 })
 
-// 4. Export a single `collections` object to register your collection(s)
-export const collections = { members, specialEvents, recurringEvents, news };
+const flipsidePlaylists = defineCollection({
+    loader: remoteCSVLoader({
+        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9lwK4u_pUe90Ff5o-2OpGSAjMv2gN-CQF1vTBbwfZgKFLYMuHhW8rjp4fsyhhL6R9ANYalYBQRjmh/pub?gid=57715937&single=true&output=csv',
+        fieldTypes: eventFieldTypes,
+    }),
+    schema: () => z.object({
+        'Date': z.optional(z.string()),
+        'Playlist': z.optional(z.string()),
+        'Spotify Link': z.optional(z.string()),
+        'Tidal Link': z.optional(z.string()),
+        'Youtube Link': z.optional(z.string()),
+    })
+})
 
+// 4. Export a single `collections` object to register your collection(s)
+export const collections = { members, specialEvents, recurringEvents, news, flipsidePlaylists }

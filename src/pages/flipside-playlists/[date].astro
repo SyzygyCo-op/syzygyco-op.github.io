@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import Prose from "../../components/Prose.astro";
+import Section from "../../components/Section.astro";
+import Layout from "../../layouts/Layout.astro";
+import { marked } from "marked";
+import Button from "../../components/Button.astro";
+import Icon from "../../components/Icon.astro";
+import Row from "../../components/containers/Row.astro";
+
+export async function getStaticPaths() {
+    return (await getCollection("flipsidePlaylists")).map((p) => ({
+        params: {
+            date: p.data.Date?.replaceAll("/", "-"),
+        },
+        props: {
+            date: p.data.Date,
+            playlist: p.data.Playlist,
+            spotifyLink: p.data["Spotify Link"],
+            tidalLink: p.data["Tidal Link"],
+            youtubeLink: p.data["Youtube Link"],
+        },
+    }));
+}
+
+const { date, playlist, spotifyLink, youtubeLink } = Astro.props;
+---
+
+<Layout>
+    <Section>
+        <Prose>
+            <h2>{date}</h2>
+            <Row extraClass="gap-2">
+                {
+                    spotifyLink && (
+                        <Button link={spotifyLink}>
+                            <Icon icon="spotify" iconPack="brands" />
+                            Spotify Playlist
+                        </Button>
+                    )
+                }
+                {
+                    youtubeLink && (
+                        <Button link={youtubeLink}>
+                            <Icon icon="youtube" iconPack="brands" />
+                            Youtube Playlist
+                        </Button>
+                    )
+                }
+            </Row>
+            {playlist && <Fragment set:html={marked(playlist)} />}
+        </Prose>
+    </Section>
+</Layout>
