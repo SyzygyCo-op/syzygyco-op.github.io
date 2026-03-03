@@ -1,6 +1,6 @@
 ---
 name: Jay Zuerndorfer
-pronouns: They/Them
+pronouns: She/Her
 photo: ./jz.jpg
 ---
 ## What Syzygy events could we find you at?
