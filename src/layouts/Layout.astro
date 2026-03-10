@@ -2,7 +2,7 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
-const { title } = Astro.props;
+const { title, imageURL, description } = Astro.props;
 import favicon from "../../content/cosmos-cat.jpg";
 import showPhoto from "../../content/show.gif";
 ---
@@ -32,18 +32,19 @@ import showPhoto from "../../content/show.gif";
     <!--ENDREGION Google Fonts -->
 
     <!-- Facebook share metadata -->
-    <meta property="og:title" content="Syzygy Artist Co-Op" />
+    <meta property="og:title" content={title ? title : "Syzygy Artist Co-Op"} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="syzygysf.com" />
-    <meta property="og:image" content={showPhoto.src} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={imageURL ? imageURL : showPhoto.src} />
+    <meta property="og:site_name" content="Syzygy Artist Co-Op" />
 
     <!-- Twitter share metadata -->
-    <meta name="twitter:title" content="Syzygy Artist Co-Op" />
+    <meta name="twitter:title" content={title ? title : "Syzygy Artist Co-Op"} />
     <meta
       name="twitter:description"
-      content="A co-op of artists and makers in San Francisco."
+      content={description ? description : "A co-op of artists and makers in San Francisco."}
     />
-    <meta name="twitter:image" content={showPhoto.src} />
+    <meta name="twitter:image" content={imageURL ? imageURL : showPhoto.src} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Icon Fonts -->

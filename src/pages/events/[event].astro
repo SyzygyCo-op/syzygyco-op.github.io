@@ -57,7 +57,7 @@ const {
 } = Astro.props;
 ---
 
-<Layout>
+<Layout title={name} imageURL={imageURL} description={description}>
     <Section>
         <Prose>
             <Row minSize="md" extraClass="items-start">
