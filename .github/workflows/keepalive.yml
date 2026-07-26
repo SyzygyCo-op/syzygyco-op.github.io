@@ -33,6 +33,7 @@ jobs:
         run: |
             git config --global user.name 'keepalive'
             git config --global user.email 'it@syzygysf.com'
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
             git commit --allow-empty -m "Keepalive commit"
-            git push
+            git push origin main
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
